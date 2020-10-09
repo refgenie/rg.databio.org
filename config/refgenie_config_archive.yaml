@@ -1,3 +1,4 @@
+# archive config
 config_version: 0.4
 genome_folder: /project/shefflab//deploy/test-data/genomes
 genome_servers: ['http://refgenomes.databio.org']
