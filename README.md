@@ -114,8 +114,6 @@ looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm --sel-attr asset --
 This will create one job for each *asset*. Monitor job progress with: 
 
 ```
-looper check asset_pep/refgenie_build_cfg.yaml  # TODO: this doesn't work because the pipeline doesn't produce flags...
-
 grep CANCELLED ../genomes/submission/*.log
 ll ../genomes/submission/*.log
 grep error ../genomes/submission/*.log
@@ -140,9 +138,7 @@ looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm
 Assets are built locally now, but to serve them, we must archive them using `refgenieserver`. The general command is `refgenieserver archive -c <path/to/genomes.yaml>`. Since the archive process is generally lengthy, it makes sense to submit this job to the cluster. We can use looper to that. To start over completely, remove the archive config file with: `rm config/refgenie_config_archive.yaml`
 
 ```
-ba
-# set the env vars again!
-looper run asset_pep/refgenieserver_archive_cfg.yaml -p bulker_slurm --sel-attr asset --sel-incl fasta
+looper run asset_pep/refgenieserver_archive_cfg.yaml -p bulker_local --sel-attr asset --sel-incl fasta
 ```
 
 Check progress with:
