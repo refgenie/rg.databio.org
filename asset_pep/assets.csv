@@ -1,0 +1,11 @@
+genome,asset
+hg38,fasta
+hg38,bowtie2_index
+rCRSd,fasta
+rCRSd,bowtie2_index
+human_repeats,fasta
+human_repeats,hisat2_index
+human_repeats,bwa_index
+mouse_chrM2x,fasta
+mouse_chrM2x,bwa_index
+mouse_chrM2x,bowtie2_index

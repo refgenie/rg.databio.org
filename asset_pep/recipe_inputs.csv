@@ -1,0 +1,5 @@
+sample_name,input_id,input_value,input_type,md5
+hg38-fasta,fasta,ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz,files,a08035b6a6e31780e96a34008ff21bd6
+human_repeats-fasta,fasta,http://big.databio.org/refgenomes/human_repeats.fa.gz,files,743cc54bd19df758eabed3623a12dc3a
+mouse_chrM2x-fasta,fasta,http://big.databio.org/refgenomes/mouse_chrM2x.fa.gz,files,1d9c5d062144877babcedade63c18f48
+rCRSd-fasta,fasta,http://big.databio.org/refgenomes/rCRSd.fa.gz,files,588ae4d05a1edf683433da78fd5d71bf

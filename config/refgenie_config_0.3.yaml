@@ -1,0 +1,39 @@
+config_version: 0.3
+genome_folder: $GENOMES
+genome_servers: ['http://refgenomes.databio.org']
+genomes:
+  Aureococcus_anophagefferens_JGI_1_0_:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: b962bd1ee2f7cb5f162d297cc9192675
+            seek_keys:
+              fasta: Aureococcus_anophagefferens_JGI_1_0_.fa
+              fai: Aureococcus_anophagefferens_JGI_1_0_.fa.fai
+              chrom_sizes: Aureococcus_anophagefferens_JGI_1_0_.chrom.sizes
+            asset_parents: []
+        default_tag: default
+    genome_description: write description here
+    genome_digest: 0b93f16dce0c952e55d7f94bc64f2b3e662f68007e4baf3b
+  Asterochloris_sp__Cgr_DA1pho_v2_0_JGI_7_45_13:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 1f4d38c7b10cc463ab7f5d18416c660e
+            seek_keys:
+              fasta: Asterochloris_sp__Cgr_DA1pho_v2_0_JGI_7_45_13.fa
+              fai: Asterochloris_sp__Cgr_DA1pho_v2_0_JGI_7_45_13.fa.fai
+              chrom_sizes: Asterochloris_sp__Cgr_DA1pho_v2_0_JGI_7_45_13.chrom.sizes
+            asset_parents: []
+        default_tag: default
+    genome_description: write description here
+    genome_digest: d91ca3246d1581e304e36f03fb3249080af40bacd0ece16a
+remote_url_base: http://awspds.refgenie.databio.org/
+genome_archive_folder: $GENOMES/archive
+genome_archive_config: refgenie_config_archive.yaml
