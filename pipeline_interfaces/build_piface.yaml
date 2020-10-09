@@ -4,7 +4,7 @@ input_schema: build_inschema.yaml
 var_templates:
   compute_vars: "{looper.piface_dir}/build-compute-params.py"
 pre_submit:
-  command_template: 
+  command_templates: 
     - "{pipeline.var_templates.compute_vars} -a {sample.asset} -g {sample.genome}"
 command_template: >
   refgenie build { sample.genome }/{ sample.asset }

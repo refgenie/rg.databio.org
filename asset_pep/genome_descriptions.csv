@@ -1,5 +1,5 @@
 sample_name,genome_description
-hg38,test description hg38
-rCRSd,test description rCRSd
-human_repeats,test description human repeats
-mouse_chrM2x,test description mouse chrM2x
+hg38-fasta,test description hg38
+rCRSd-fasta,test description rCRSd
+human_repeats-fasta,test description human repeats
+mouse_chrM2x-fasta,test description mouse chrM2x

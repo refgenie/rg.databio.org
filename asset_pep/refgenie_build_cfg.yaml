@@ -10,7 +10,7 @@ sample_modifiers:
   append:
     local_input: "LOCAL_INPUT"
     sample_name: "sn"
-    pipeline_interfaces: ../pipeline_interfaces/refgenie_piface.yaml
+    pipeline_interfaces: ../pipeline_interfaces/build_piface.yaml 
   derive:
     attributes: ['sample_name', 'local_input']
     sources:
