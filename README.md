@@ -141,9 +141,8 @@ Assets are built locally now, but to serve them, we must archive them using `ref
 
 ```
 ba
+# set the env vars again!
 looper run asset_pep/refgenieserver_archive_cfg.yaml -p bulker_slurm --sel-attr asset --sel-incl fasta
-
-<!-- looper run asset_pep/refgenieserver_archive_cfg.yaml -p slurm -t 0.1 -c partition=standard -->
 ```
 
 Check progress with:
