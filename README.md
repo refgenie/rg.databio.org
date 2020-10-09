@@ -89,7 +89,7 @@ Many of the assets require some input files, and we have to make sure we have th
 ```
 cd $SERVERNAME
 mkdir -p $REFGENIE_RAW
-looper run asset_pep/refgenie_build_cfg.yaml -p local --amend getfiles
+looper run asset_pep/refgenie_build_cfg.yaml -p local --amend getfiles --sel-attr asset --sel-incl fasta
 ```
 
 Check for errors here:
