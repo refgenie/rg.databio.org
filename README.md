@@ -66,7 +66,7 @@ In this guide we'll use environment variables to keep track of where stuff goes.
 ```
 #export BASEDIR=$HOME/code/sandbox/refgenie_deploy
 #export REFGENIE_RAW=$BASEDIR/refgenie_raw
-export SERVERNAME=plantref
+export SERVERNAME=test-data
 export BASEDIR=$PROJECT/deploy/$SERVERNAME
 export GENOMES=$BASEDIR/genomes
 export REFGENIE_RAW=/project/shefflab/www/refgenie_$SERVERNAME
