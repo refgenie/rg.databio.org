@@ -36,7 +36,8 @@ name: Deploy to Amazon ECS - test-data
 jobs:
   deploy:
     env:
-      server: software-staging
+      data-repo: test-data
+      service: software-staging
     name: Deploy
     runs-on: ubuntu-latest
     steps:
@@ -65,7 +66,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfiles/${{ env.server }}.Dockerfile .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfiles/${{ env.data-repo }}.Dockerfile .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
@@ -73,7 +74,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: task_defs/${{ env.server }}.json
+        task-definition: task_defs/${{ env.service }}.json
         container-name: rgs-container
         image: ${{ steps.build-image.outputs.image }}
 
@@ -81,6 +82,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: rgs-service-${{ env.server }}
+        service: rgs-service-${{ env.service }}
         cluster: hydra
         wait-for-service-stability: true
