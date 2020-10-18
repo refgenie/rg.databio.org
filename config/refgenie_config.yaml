@@ -28,7 +28,7 @@ genomes:
             asset_parents: ['58de7f33a36ccd9d6e3b1b3afe6b9f37cd5b2867bbfb929a/fasta:default']
         default_tag: default
     aliases: ['hg38']
-    genome_description: test
+    genome_description: The GCA_000001405.15 GRCh38_no_alt_analysis_set from NCBI
   ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224:
     assets:
       fasta:
@@ -65,7 +65,7 @@ genomes:
             asset_parents: ['ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224/fasta:default']
         default_tag: default
     aliases: ['human_repeats']
-    genome_description: test
+    genome_description: Manually curated collection of human repeat sequences from GenBank
   511fb1178275e7d529560d53b949dba40815f195623bce8e:
     assets:
       fasta:
@@ -92,7 +92,7 @@ genomes:
             asset_parents: ['511fb1178275e7d529560d53b949dba40815f195623bce8e/fasta:default']
         default_tag: default
     aliases: ['rCRSd']
-    genome_description: test
+    genome_description: The revised cambridge reference sequence. This is the human mitochondrial reference genome
   194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496:
     assets:
       fasta:
@@ -129,7 +129,7 @@ genomes:
             asset_parents: ['194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496/fasta:default']
         default_tag: default
     aliases: ['mouse_chrM2x']
-    genome_description: test
+    genome_description: The mouse mitochondrial genome, doubled
 remote_url_base: https://refgenie.s3.amazonaws.com
 genome_archive_folder: /project/shefflab//deploy/test-data/genomes/archive
 genome_archive_config: refgenie_config_archive.yaml
