@@ -37,7 +37,7 @@ genomes:
             legacy_archive_digest: 0ac84ad03454e923e7bd357b368af110
         default_tag: default
     aliases: ['hg38']
-    genome_description: test
+    genome_description: The GCA_000001405.15 GRCh38_no_alt_analysis_set from NCBI
   ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224:
     assets:
       fasta:
@@ -88,7 +88,7 @@ genomes:
             legacy_archive_digest: 650c0639750e4cf47195692f78424721
         default_tag: default
     aliases: ['human_repeats']
-    genome_description: test
+    genome_description: Manually curated collection of human repeat sequences from GenBank
   511fb1178275e7d529560d53b949dba40815f195623bce8e:
     assets:
       fasta:
@@ -124,7 +124,7 @@ genomes:
             legacy_archive_digest: 9eca00ecd015c53c6bc7d0d91a02ac0e
         default_tag: default
     aliases: ['rCRSd']
-    genome_description: test
+    genome_description: The revised cambridge reference sequence. This is the human mitochondrial reference genome
   194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496:
     assets:
       fasta:
@@ -175,7 +175,7 @@ genomes:
             legacy_archive_digest: 77bce136d6bd4b092957563ce725fb91
         default_tag: default
     aliases: ['mouse_chrM2x']
-    genome_description: test
+    genome_description: The mouse mitochondrial genome, doubled
 remote_url_base: http://awspds.refgenie.databio.org/test-data/
 genome_archive_folder: /project/shefflab//deploy/test-data/genomes/archive
 genome_archive_config: refgenie_config_archive.yaml
