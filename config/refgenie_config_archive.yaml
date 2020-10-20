@@ -16,10 +16,10 @@ genomes:
               chrom_sizes: 58de7f33a36ccd9d6e3b1b3afe6b9f37cd5b2867bbfb929a.chrom.sizes
             asset_parents: []
             asset_children: ['58de7f33a36ccd9d6e3b1b3afe6b9f37cd5b2867bbfb929a/bowtie2_index:default']
-            archive_digest: 534269305b47d8b096975349d843072d
+            archive_digest: 570517d8f0dc52dad032a8a4e384aa2e
             archive_size: 833.4MB
             asset_size: 2.9GB
-            legacy_archive_digest: bd3bfd907ccfb1e1cd0580193927346c
+            legacy_archive_digest: 7c1d3578ad0ef8a8f3f4cdea2cf6215a
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -30,11 +30,11 @@ genomes:
             seek_keys:
               bowtie2_index: 58de7f33a36ccd9d6e3b1b3afe6b9f37cd5b2867bbfb929a
             asset_parents: ['58de7f33a36ccd9d6e3b1b3afe6b9f37cd5b2867bbfb929a/fasta:default']
-            archive_digest: c8516e5197776a688e82903ff99c7ec3
+            archive_digest: 21aa7c99bc74a4cbdb6c597db363660c
             archive_size: 3.5GB
             asset_size: 3.9GB
             asset_children: []
-            legacy_archive_digest: 0ac84ad03454e923e7bd357b368af110
+            legacy_archive_digest: 7a23c38f5a6fefd3d600d219bd41ba9e
         default_tag: default
     aliases: ['hg38']
     genome_description: The GCA_000001405.15 GRCh38_no_alt_analysis_set from NCBI
@@ -52,10 +52,10 @@ genomes:
               chrom_sizes: ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224.chrom.sizes
             asset_parents: []
             asset_children: ['ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224/bwa_index:default', 'ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224/hisat2_index:default']
-            archive_digest: 979d0f6b824b7dd40869a7393946d3a7
+            archive_digest: 8bfbefadb993cc3ea750cc032a0f9f55
             archive_size: 33.7KB
             asset_size: 154.0KB
-            legacy_archive_digest: c0c01f5fa3fb780136e14c1e0f924221
+            legacy_archive_digest: 821b34493a8667c18ffe2cf14fd68d1d
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -66,11 +66,11 @@ genomes:
             seek_keys:
               bwa_index: ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224.fa
             asset_parents: ['ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224/fasta:default']
-            archive_digest: 1c8a7d5cdb8dc8246adc548f7dd9e6f7
-            archive_size: 163.9KB
+            archive_digest: 5605308b884b23871ba2e23fe0225c53
+            archive_size: 131.0KB
             asset_size: 252.5KB
             asset_children: []
-            legacy_archive_digest: 180505a12540cc112e68febb15dc10f7
+            legacy_archive_digest: d4c18bbb151dd39696ca2d3153a31071
         default_tag: default
       hisat2_index:
         asset_description: Genome index for HISAT2, produced with hisat2-build
@@ -81,11 +81,11 @@ genomes:
             seek_keys:
               hisat2_index: ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224
             asset_parents: ['ebf26d2f064462bea7029e6b4d2298967d7435bff82ed224/fasta:default']
-            archive_digest: 148482568232e7c475123691f40c9ac0
+            archive_digest: 9ccf660fd4487b937e7f95ee28ffbca7
             archive_size: 348.5KB
             asset_size: 4.6MB
             asset_children: []
-            legacy_archive_digest: 650c0639750e4cf47195692f78424721
+            legacy_archive_digest: bab1261d60659f68a458de0dc0cf027e
         default_tag: default
     aliases: ['human_repeats']
     genome_description: Manually curated collection of human repeat sequences from GenBank
@@ -103,10 +103,10 @@ genomes:
               chrom_sizes: 511fb1178275e7d529560d53b949dba40815f195623bce8e.chrom.sizes
             asset_parents: []
             asset_children: ['511fb1178275e7d529560d53b949dba40815f195623bce8e/bowtie2_index:default']
-            archive_digest: 9a094bc995240797d24c7deb8cd9e4b6
+            archive_digest: 077e9bb87dd5c69268a8913b743178c7
             archive_size: 8.7KB
             asset_size: 42.2KB
-            legacy_archive_digest: 62cd68ac1fdc3255e9ad2703bdee24ed
+            legacy_archive_digest: 0dd1a00cdb21d153ca711c9d5c450902
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -117,11 +117,11 @@ genomes:
             seek_keys:
               bowtie2_index: 511fb1178275e7d529560d53b949dba40815f195623bce8e
             asset_parents: ['511fb1178275e7d529560d53b949dba40815f195623bce8e/fasta:default']
-            archive_digest: b2d54471e87474026ed165d732fb301a
+            archive_digest: 4c00309ca1dc9c388e13f400172c076d
             archive_size: 117.3KB
             asset_size: 8.1MB
             asset_children: []
-            legacy_archive_digest: 9eca00ecd015c53c6bc7d0d91a02ac0e
+            legacy_archive_digest: 494683fc31d7444c4aa9a248e9e868e4
         default_tag: default
     aliases: ['rCRSd']
     genome_description: The revised cambridge reference sequence. This is the human mitochondrial reference genome
@@ -139,10 +139,10 @@ genomes:
               chrom_sizes: 194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496.chrom.sizes
             asset_parents: []
             asset_children: ['194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496/bwa_index:default', '194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496/bowtie2_index:default']
-            archive_digest: 7260f11f8d5d3898bf969e804712b43e
-            archive_size: 9.0KB
+            archive_digest: a07c0cefba3b76ea018f1cf37c73266f
+            archive_size: 9.1KB
             asset_size: 41.8KB
-            legacy_archive_digest: e7159e01c51042e21c11c378735f680f
+            legacy_archive_digest: 27dca3db833bb1438530d5ff88bbef7e
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -153,11 +153,11 @@ genomes:
             seek_keys:
               bwa_index: 194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496.fa
             asset_parents: ['194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496/fasta:default']
-            archive_digest: 42c0636446ffe5bf6a33015faeb941c6
-            archive_size: 41.5KB
+            archive_digest: 89f89509d333f3755530dac422937a66
+            archive_size: 31.8KB
             asset_size: 64.0KB
             asset_children: []
-            legacy_archive_digest: 9587fc5818e168b9c4aaf7eef840fb27
+            legacy_archive_digest: 445db0e5685e68e91fa64885681de9db
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -168,11 +168,11 @@ genomes:
             seek_keys:
               bowtie2_index: 194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496
             asset_parents: ['194f8681e3d9e35b9eca2d17ec5e36bbf5e8c2beea486496/fasta:default']
-            archive_digest: bc18e75a6877680a92cec48ea0a15d37
+            archive_digest: b1707c117aaf39501b85fa6ac560b34f
             archive_size: 119.9KB
             asset_size: 8.1MB
             asset_children: []
-            legacy_archive_digest: 77bce136d6bd4b092957563ce725fb91
+            legacy_archive_digest: 3cf77ea592b0bf1365f383c27890f5c3
         default_tag: default
     aliases: ['mouse_chrM2x']
     genome_description: The mouse mitochondrial genome, doubled
