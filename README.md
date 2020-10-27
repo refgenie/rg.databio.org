@@ -102,7 +102,7 @@ grep checksum ../genomes/submission/*.log
 Once files are present locally, we can run `refgenie build` on each asset specified in the sample_table (`assets.csv`). If you have not initialized it, then first you must init the config:
 
 ```
-refgenie init -c config/refgenie_config.yaml -f $GENOMES -u https://refgenie.s3.amazonaws.com -a $GENOMES/archive -b refgenie_config_archive.yaml
+refgenie init -c config/refgenie_config.yaml -f $GENOMES -u http://awspds.refgenie.databio.org/test-data/ -a $GENOMES/archive -b refgenie_config_archive.yaml
 ```
 
 We have to submit fasta assets first:
@@ -154,7 +154,7 @@ Now the archives should be built, so we'll sync them to AWS. Use the refgenie cr
 
 
 ```
-aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org --profile refgenie
+aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org/test-data/ --profile refgenie
 ```
 
 ## Step 4. Deploy server 
