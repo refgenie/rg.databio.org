@@ -82,6 +82,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: rgs-service-${{ env.service }}
-        cluster: hydra
+        service: rgs-service-dev1
+        cluster: yeti
         wait-for-service-stability: true
