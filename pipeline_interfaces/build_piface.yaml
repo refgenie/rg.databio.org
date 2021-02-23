@@ -1,4 +1,4 @@
-pipeline_name: refgenie
+pipeline_name: refgenie-build
 pipeline_type: sample
 input_schema: build_inschema.yaml
 var_templates:
