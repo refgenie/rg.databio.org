@@ -1,6 +1,6 @@
-# refgenomes.databio.org server overview
+# rg.databio.org server overview
 
-This repository contains the files to build and archive genome assets to serve with [refgenieserver](https://github.com/refgenie/refgenieserver) at http://refgenomes.databio.org. 
+This repository contains the files to build and archive genome assets to serve with [refgenieserver](https://github.com/refgenie/refgenieserver) at http://rg.databio.org. 
 
 The whole process is scripted, starting from this repository. From here, we do this basic workflow:
 
@@ -64,9 +64,7 @@ In this guide we'll use environment variables to keep track of where stuff goes.
 - `REFGENIE_ARCHIVE` points to the location where we'll store the actual archives
 
 ```
-#export BASEDIR=$HOME/code/sandbox/refgenie_deploy
-#export REFGENIE_RAW=$BASEDIR/refgenie_raw
-export SERVERNAME=test-data
+export SERVERNAME=rg.databio.org
 export BASEDIR=$PROJECT/deploy/$SERVERNAME
 export GENOMES=$BASEDIR/genomes
 export REFGENIE_RAW=/project/shefflab/www/refgenie_$SERVERNAME
@@ -102,7 +100,7 @@ grep checksum ../genomes/submission/*.log
 Once files are present locally, we can run `refgenie build` on each asset specified in the sample_table (`assets.csv`). If you have not initialized it, then first you must init the config:
 
 ```
-refgenie init -c config/refgenie_config.yaml -f $GENOMES -u http://awspds.refgenie.databio.org/test-data/ -a $GENOMES/archive -b refgenie_config_archive.yaml
+refgenie init -c config/refgenie_config.yaml -f $GENOMES -u http://awspds.refgenie.databio.org/rg.databio.org/ -a $GENOMES/archive -b refgenie_config_archive.yaml
 ```
 
 We have to submit fasta assets first:
@@ -154,7 +152,7 @@ Now the archives should be built, so we'll sync them to AWS. Use the refgenie cr
 
 
 ```
-aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org/test-data/ --profile refgenie
+aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org/rg.databio.org/ --profile refgenie
 ```
 
 ## Step 4. Deploy server 
