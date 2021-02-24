@@ -1,8 +1,5 @@
 config_version: 0.4
-genome_folder: /project/shefflab/deploy/test-data/test-data/config
-remote_url_base: http://awspds.refgenie.databio.org/test-data/
-genome_archive_folder: /project/shefflab//deploy/test-data/genomes/archive
-genome_archive_config: refgenie_config_archive.yaml
+genome_folder: /project/shefflab//deploy/rg.databio.org/genomes
 genome_servers: 
  - http://refgenomes.databio.org
 genomes:
@@ -36,36 +33,6 @@ genomes:
     aliases: 
      - hg38
     genome_description: test description hg38
-  94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4:
-    assets:
-      fasta:
-        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
-        tags:
-          default:
-            asset_path: fasta
-            asset_digest: 4eb430296bc02ed7e4006624f1d5ac53
-            seek_keys:
-              fasta: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa
-              fai: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa.fai
-              chrom_sizes: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.chrom.sizes
-            asset_parents: []
-            asset_children: 
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
-        default_tag: default
-      bowtie2_index:
-        asset_description: Genome index for bowtie, produced with bowtie-build
-        tags:
-          default:
-            asset_path: bowtie2_index
-            asset_digest: 1262e30d4a87db9365d501de8559b3b4
-            seek_keys:
-              bowtie2_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4
-            asset_parents: 
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
-        default_tag: default
-    aliases: 
-     - rCRSd
-    genome_description: test description rCRSd
   7319f9237651755047bc40d7f7a9770d42a537e840f4e105:
     assets:
       fasta:
@@ -108,6 +75,36 @@ genomes:
     aliases: 
      - human_repeats
     genome_description: test description human repeats
+  94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 4eb430296bc02ed7e4006624f1d5ac53
+            seek_keys:
+              fasta: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa
+              fai: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa.fai
+              chrom_sizes: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.chrom.sizes
+            asset_parents: []
+            asset_children: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 1262e30d4a87db9365d501de8559b3b4
+            seek_keys:
+              bowtie2_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4
+            asset_parents: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+        default_tag: default
+    aliases: 
+     - rCRSd
+    genome_description: test description rCRSd
   43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a:
     assets:
       fasta:
@@ -150,3 +147,6 @@ genomes:
     aliases: 
      - mouse_chrM2x
     genome_description: test description mouse chrM2x
+remote_url_base: http://awspds.refgenie.databio.org/rg.databio.org/
+genome_archive_folder: /project/shefflab//deploy/rg.databio.org/genomes/archive
+genome_archive_config: refgenie_config_archive.yaml

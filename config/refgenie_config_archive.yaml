@@ -1,8 +1,5 @@
 config_version: 0.4
-genome_folder: /project/shefflab/deploy/test-data/test-data/config
-remote_url_base: http://awspds.refgenie.databio.org/test-data/
-genome_archive_folder: /project/shefflab//deploy/test-data/genomes/archive
-genome_archive_config: refgenie_config_archive.yaml
+genome_folder: /project/shefflab//deploy/rg.databio.org/genomes
 genome_servers: 
  - http://refgenomes.databio.org
 genomes:
@@ -21,10 +18,10 @@ genomes:
             asset_parents: []
             asset_children: 
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bowtie2_index:default
-            archive_digest: ddf84ed0647cf0a83c422a2a6e2fc6bf
+            archive_digest: 7f28d08efddaa02de25f0dba53ffba56
             archive_size: 833.4MB
             asset_size: 2.9GB
-            legacy_archive_digest: 9ebb526426d24fa0044c6213698bc83f
+            legacy_archive_digest: 1034d2f7a27d00dbbad2a8427a1f9a82
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -36,54 +33,15 @@ genomes:
               bowtie2_index: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4
             asset_parents: 
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
-            archive_digest: 4d2889e79e381e3d6d506c30db252f9d
+            archive_digest: ccd61af740f0e654c320ec80a868b4a0
             archive_size: 3.5GB
             asset_size: 3.9GB
             asset_children: []
-            legacy_archive_digest: 401840d34350873bf2bcfa71d891c023
+            legacy_archive_digest: 7d255692096d82b8c3a3d2950a1a9d16
         default_tag: default
     aliases: 
      - hg38
     genome_description: test description hg38
-  94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4:
-    assets:
-      fasta:
-        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
-        tags:
-          default:
-            asset_path: fasta
-            asset_digest: 4eb430296bc02ed7e4006624f1d5ac53
-            seek_keys:
-              fasta: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa
-              fai: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa.fai
-              chrom_sizes: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.chrom.sizes
-            asset_parents: []
-            asset_children: 
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
-            archive_digest: 83c79ca31d490a190768216992472085
-            archive_size: 8.6KB
-            asset_size: 40.5KB
-            legacy_archive_digest: 377f63f98046a057087e17436d7e5084
-        default_tag: default
-      bowtie2_index:
-        asset_description: Genome index for bowtie, produced with bowtie-build
-        tags:
-          default:
-            asset_path: bowtie2_index
-            asset_digest: 1262e30d4a87db9365d501de8559b3b4
-            seek_keys:
-              bowtie2_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4
-            asset_parents: 
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
-            archive_digest: 2600494cb28709589113f4204c567317
-            archive_size: 117.0KB
-            asset_size: 8.1MB
-            asset_children: []
-            legacy_archive_digest: e41a0366e1f60b9537ea2a8063862056
-        default_tag: default
-    aliases: 
-     - rCRSd
-    genome_description: test description rCRSd
   7319f9237651755047bc40d7f7a9770d42a537e840f4e105:
     assets:
       fasta:
@@ -100,10 +58,10 @@ genomes:
             asset_children: 
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/hisat2_index:default
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/bwa_index:default
-            archive_digest: ad75ac65515d5bc47ac9a09052a64f65
+            archive_digest: 7f806088a7180cc05ef534ce5522b2a1
             archive_size: 33.8KB
-            asset_size: 154.8KB
-            legacy_archive_digest: 7c65b76d3d48836a9ba9ec984b27e7ed
+            asset_size: 154.9KB
+            legacy_archive_digest: a41fc195f2edd7325fd7b828e941a92f
         default_tag: default
       hisat2_index:
         asset_description: Genome index for HISAT2, produced with hisat2-build
@@ -115,11 +73,11 @@ genomes:
               hisat2_index: 7319f9237651755047bc40d7f7a9770d42a537e840f4e105
             asset_parents: 
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
-            archive_digest: 53c2e0565ae19c4e42ff7743ee468964
-            archive_size: 348.6KB
+            archive_digest: 794c9c47cf462947f60862061ffd5a0d
+            archive_size: 348.5KB
             asset_size: 4.6MB
             asset_children: []
-            legacy_archive_digest: a1a9832f1afe3eb612b162571f553405
+            legacy_archive_digest: 0fcdb0e5c13953b1262a3500eec26f09
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -131,15 +89,54 @@ genomes:
               bwa_index: 7319f9237651755047bc40d7f7a9770d42a537e840f4e105.fa
             asset_parents: 
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
-            archive_digest: b9b2b47989a045a7aa64fea41860b248
+            archive_digest: 8a4b41778a98e039a9cf3d880c55ccbd
             archive_size: 130.8KB
             asset_size: 253.3KB
             asset_children: []
-            legacy_archive_digest: ac7788ac80a32baf7520be8a23cced22
+            legacy_archive_digest: 40c6925806b6fe376e176743116156f3
         default_tag: default
     aliases: 
      - human_repeats
     genome_description: test description human repeats
+  94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 4eb430296bc02ed7e4006624f1d5ac53
+            seek_keys:
+              fasta: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa
+              fai: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa.fai
+              chrom_sizes: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.chrom.sizes
+            asset_parents: []
+            asset_children: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
+            archive_digest: ccf824eb723285db92ab059d8ac2ec95
+            archive_size: 8.6KB
+            asset_size: 40.6KB
+            legacy_archive_digest: cf3d2008d372b6323ad8398bd1ad4f57
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 1262e30d4a87db9365d501de8559b3b4
+            seek_keys:
+              bowtie2_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4
+            asset_parents: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+            archive_digest: eeea620b5efc61cf96ca05420ca45f0f
+            archive_size: 117.0KB
+            asset_size: 8.1MB
+            asset_children: []
+            legacy_archive_digest: 4f280a4d6dcae27d987f131be496eab1
+        default_tag: default
+    aliases: 
+     - rCRSd
+    genome_description: test description rCRSd
   43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a:
     assets:
       fasta:
@@ -156,10 +153,10 @@ genomes:
             asset_children: 
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/bwa_index:default
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/bowtie2_index:default
-            archive_digest: b1425d813a74dc6b3a4c254898ad433a
+            archive_digest: a104fb7c5da31cff4a343a9724904907
             archive_size: 9.1KB
             asset_size: 40.0KB
-            legacy_archive_digest: 9c87f525c07a07504a2e8071ad6bfa79
+            legacy_archive_digest: fd002a12c82fb63b2d4143a825e8aee2
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -171,11 +168,11 @@ genomes:
               bwa_index: 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a.fa
             asset_parents: 
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
-            archive_digest: fb392c6e69b820e0af76200818345c38
+            archive_digest: 3454911cecdaf0ccc589f83138eab7e2
             archive_size: 32.2KB
             asset_size: 62.4KB
             asset_children: []
-            legacy_archive_digest: 34f5528c75cd33c4fe3db84d17f29383
+            legacy_archive_digest: cc08e814f264ecc861d8e45e9daa7b79
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -187,12 +184,15 @@ genomes:
               bowtie2_index: 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a
             asset_parents: 
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
-            archive_digest: 39c6f4a18fea682ee78ef1b16aebe7f1
+            archive_digest: 2b72e4fc2a2eaa5eefa431926d732e03
             archive_size: 119.7KB
             asset_size: 8.1MB
             asset_children: []
-            legacy_archive_digest: 39ccf8fe082d2efdd021c3fb9bb6ad22
+            legacy_archive_digest: 53127ba41caff66f0ef73e656124f5d9
         default_tag: default
     aliases: 
      - mouse_chrM2x
     genome_description: test description mouse chrM2x
+remote_url_base: http://awspds.refgenie.databio.org/rg.databio.org/
+genome_archive_folder: /project/shefflab//deploy/rg.databio.org/genomes/archive
+genome_archive_config: refgenie_config_archive.yaml
