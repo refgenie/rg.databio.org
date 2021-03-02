@@ -5,9 +5,11 @@ This repository contains the files to build and archive genome assets to serve w
 The whole process is scripted, starting from this repository. From here, we do this basic workflow:
 
 1. Download raw input files for assets (FASTA files, GTF files etc.)
-2. Build assets with `refgenie build` in a local refgenie instance
-3. Archive assets with `refgenieserver archive`
-4. Deploy assets to active server on AWS.
+2. Configure refgenie
+3. Build assets with `refgenie build` in a local refgenie instance
+4. Archive assets with `refgenieserver archive`
+5. Upload archives to S3
+6. Deploy assets to active server on AWS.
 
 
 # Adding an asset to this server
@@ -90,20 +92,25 @@ mkdir -p $REFGENIE_RAW
 looper run asset_pep/refgenie_build_cfg.yaml -p local --amend getfiles --sel-attr asset --sel-incl fasta
 ```
 
-Check for errors here:
+Check the status with `looper check --use-pipesat`:
+
+*`--use-pipesat` option is required as of early 2021. Might not be required if you're running later on.*
+
 ```
-grep checksum ../genomes/submission/*.log
+looper check asset_pep/refgenie_build_cfg.yaml --amend getfiles --sel-attr asset --sel-incl fasta --use-pipestat
 ```
 
-## Step 2: Build assets
+## Step 2: Refgenie genome configuration file initialization
 
-Once files are present locally, we can run `refgenie build` on each asset specified in the sample_table (`assets.csv`). If you have not initialized it, then first you must init the config:
+This repository comes with files genome cofiguration file already defined in [`\config`](config) directory, but if you have not initialized refgenie yet or want to start over, then first you can initialize the config like this:
 
 ```
 refgenie init -c config/refgenie_config.yaml -f $GENOMES -u http://awspds.refgenie.databio.org/rg.databio.org/ -a $GENOMES/archive -b refgenie_config_archive.yaml
 ```
 
-We have to submit fasta assets first:
+## Step 3: Build assets
+
+Once files are present locally, we can run `refgenie build` on each asset specified in the sample_table (`assets.csv`). We have to submit fasta assets first:
 
 ```
 looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm --sel-attr asset --sel-incl fasta
@@ -131,9 +138,17 @@ To run all the asset types:
 looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm
 ```
 
-## Step 3. Archive assets
+## Step 4. Archive assets
 
-Assets are built locally now, but to serve them, we must archive them using `refgenieserver`. The general command is `refgenieserver archive -c <path/to/genomes.yaml>`. Since the archive process is generally lengthy, it makes sense to submit this job to the cluster. We can use looper to that. To start over completely, remove the archive config file with: `rm config/refgenie_config_archive.yaml`
+Assets are built locally now, but to serve them, we must archive them using `refgenieserver`. The general command is `refgenieserver archive -c <path/to/genomes.yaml>`. Since the archive process is generally lengthy, it makes sense to submit this job to a cluster. We can use looper to do that. 
+
+To start over completely, remove the archive config file with: 
+
+``` 
+rm config/refgenie_config_archive.yaml
+```
+
+Then submit the archiving jobs with `looper run`
 
 ```
 looper run asset_pep/refgenieserver_archive_cfg.yaml -p bulker_local --sel-attr asset --sel-incl fasta
@@ -148,6 +163,8 @@ grep Error ../genomes/archive_logs/submission/*.log
 cat ../genomes/archive_logs/submission/*.log
 ```
 
+## Step 5. Upload archives to S3
+
 Now the archives should be built, so we'll sync them to AWS. Use the refgenie credentials (here added with `--profile refgenie`, which should be preconfigured with `aws configure`)
 
 
@@ -155,7 +172,7 @@ Now the archives should be built, so we'll sync them to AWS. Use the refgenie cr
 aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org/rg.databio.org/ --profile refgenie
 ```
 
-## Step 4. Deploy server 
+## Step 6. Deploy server 
 
 Now everything is ready to deploy. If using refgenieserver directly, you'll run `refgenieserver serve config/refgenieserver_archive_cfg`. We're hosting this repository on AWS and use GitHub Actions to trigger  trigger deploy jobs to push the updates to AWS ECS whenever a change is detected in the config file. 
 
