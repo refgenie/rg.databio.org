@@ -71,7 +71,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: task_defs/rg.databio.org.json
+        task-definition: task_defs/dev1.json
         container-name: rgs-container
         image: ${{ steps.build-image.outputs.image }}
 
