@@ -31,14 +31,11 @@ on:
     inputs: null  
 
 
-name: Deploy to Amazon ECS - test-data
+name: Deploy to Amazon ECS - rg.databio.org
 
 jobs:
   deploy:
-    env:
-      data-repo: test-data
-      service: software-staging
-    name: Deploy
+    name: Deploy rg.databio.org
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -66,7 +63,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfiles/${{ env.data-repo }}.Dockerfile .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfiles/rg.databio.org.Dockerfile .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
@@ -74,7 +71,7 @@ jobs:
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: task_defs/${{ env.service }}.json
+        task-definition: task_defs/rg.databio.org.json
         container-name: rgs-container
         image: ${{ steps.build-image.outputs.image }}
 

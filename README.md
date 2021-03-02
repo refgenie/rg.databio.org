@@ -5,9 +5,11 @@ This repository contains the files to build and archive genome assets to serve w
 The whole process is scripted, starting from this repository. From here, we do this basic workflow:
 
 1. Download raw input files for assets (FASTA files, GTF files etc.)
-2. Build assets with `refgenie build` in a local refgenie instance
-3. Archive assets with `refgenieserver archive`
-4. Deploy assets to active server on AWS.
+2. Configure refgenie
+3. Build assets with `refgenie build` in a local refgenie instance
+4. Archive assets with `refgenieserver archive`
+5. Upload archives to S3
+6. Deploy assets to active server on AWS.
 
 
 # Adding an asset to this server
@@ -161,6 +163,8 @@ grep Error ../genomes/archive_logs/submission/*.log
 cat ../genomes/archive_logs/submission/*.log
 ```
 
+## Step 5. Upload archives to S3
+
 Now the archives should be built, so we'll sync them to AWS. Use the refgenie credentials (here added with `--profile refgenie`, which should be preconfigured with `aws configure`)
 
 
@@ -168,7 +172,7 @@ Now the archives should be built, so we'll sync them to AWS. Use the refgenie cr
 aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org/rg.databio.org/ --profile refgenie
 ```
 
-## Step 5. Deploy server 
+## Step 6. Deploy server 
 
 Now everything is ready to deploy. If using refgenieserver directly, you'll run `refgenieserver serve config/refgenieserver_archive_cfg`. We're hosting this repository on AWS and use GitHub Actions to trigger  trigger deploy jobs to push the updates to AWS ECS whenever a change is detected in the config file. 
 
