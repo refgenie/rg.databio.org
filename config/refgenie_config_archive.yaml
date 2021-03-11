@@ -3053,6 +3053,6 @@ genomes:
     aliases: 
      - hg38_mm10
     genome_description: Merged genome with primary chromosomes of hg38 and mm10 from UCSC.
-remote_url_base: http://awspds.refgenie.databio.org/rg.databio.org/
+remote_url_base: http://awspds.refgenie.databio.org/refgenomes.databio.org/
 genome_archive_folder: /project/shefflab/deploy/rg.databio.org/genomes/archive
 genome_archive_config: refgenie_config_archive.yaml
