@@ -194,5 +194,12 @@ genomes:
      - hg38
     genome_description: test description hg38
 remote_url_base: http://awspds.refgenie.databio.org/rg.databio.org/
+remotes:
+  http:
+    prefix: http://awspds.refgenie.databio.org/rg.databio.org/
+    description: This is an HTTP compatible endpoint
+  s3:
+    prefix: s3://awspds.refgenie.databio.org/rg.databio.org/
+    description: This is an S3 compatible endpoint
 genome_archive_folder: /project/shefflab//deploy/rg.databio.org/genomes/archive
 genome_archive_config: refgenie_config_archive.yaml
