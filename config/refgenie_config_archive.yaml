@@ -193,7 +193,6 @@ genomes:
     aliases: 
      - hg38
     genome_description: test description hg38
-remote_url_base: http://awspds.refgenie.databio.org/rg.databio.org/
 remotes:
   http:
     prefix: http://awspds.refgenie.databio.org/rg.databio.org/
