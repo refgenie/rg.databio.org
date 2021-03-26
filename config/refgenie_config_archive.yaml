@@ -5,10 +5,10 @@ genome_servers:
 remotes:
   http:
     prefix: http://awspds.refgenie.databio.org/rg.databio.org/
-    description: This is an HTTP compatible endpoint
+    description: Serves HTTP compatible path
   s3:
     prefix: s3://awspds.refgenie.databio.org/rg.databio.org/
-    description: This is an S3 compatible endpoint
+    description: Serves S3 compatible path
 genomes:
   94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4:
     assets:
