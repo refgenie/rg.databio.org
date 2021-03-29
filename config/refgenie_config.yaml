@@ -139,6 +139,20 @@ genomes:
               chrom_sizes: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bowtie2_index:default
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 04880a3192a69bbfdc36da25b67203cb
+            seek_keys:
+              bowtie2_index: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
         default_tag: default
     aliases: 
      - hg38
