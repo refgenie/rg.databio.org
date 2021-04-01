@@ -26,6 +26,7 @@ genomes:
             asset_parents: []
             asset_children: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/salmon_index:default
             archive_digest: 6ee360248403e0db37f22334fe0e9d70
             archive_size: 8.6KB
             asset_size: 39.9KB
@@ -48,6 +49,23 @@ genomes:
             asset_children: []
             legacy_archive_digest: 7e26f6e778c291fee173d2aa59bf1914
         default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_index
+            seek_keys:
+              salmon_index: .
+              dir: .
+            archive_digest: 937dc48a23ba7fdc9444fcbeea52967e
+            archive_size: 53.9KB
+            asset_size: 149.0KB
+            asset_parents: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+            asset_children: []
+            asset_digest: 74a0e463d958e7d6d070e656cdd84d45
+            legacy_archive_digest: 3bff53354143b44bac3a84d7e0fcb18f
     aliases: 
      - rCRSd
     genome_description: test description rCRSd

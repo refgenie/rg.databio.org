@@ -19,6 +19,7 @@ genomes:
             asset_parents: []
             asset_children: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/salmon_index:default
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -28,6 +29,18 @@ genomes:
             asset_digest: 1262e30d4a87db9365d501de8559b3b4
             seek_keys:
               bowtie2_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4
+              dir: .
+            asset_parents: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+        default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        tags:
+          default:
+            asset_path: salmon_index
+            asset_digest: 74a0e463d958e7d6d070e656cdd84d45
+            seek_keys:
+              salmon_index: .
               dir: .
             asset_parents: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
