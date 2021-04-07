@@ -5,6 +5,7 @@ rCRSd,fasta
 rCRSd,bowtie2_index
 rCRSd,salmon_index
 rCRSd,bismark_bt2_index
+rCRSd,star_index
 human_repeats,fasta
 human_repeats,hisat2_index
 human_repeats,bwa_index
