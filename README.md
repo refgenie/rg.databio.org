@@ -105,7 +105,7 @@ looper check asset_pep/refgenie_build_cfg.yaml --amend getfiles --sel-attr asset
 This repository comes with files genome cofiguration file already defined in [`\config`](config) directory, but if you have not initialized refgenie yet or want to start over, then first you can initialize the config like this:
 
 ```
-refgenie init -c config/refgenie_config.yaml -f $GENOMES -u http://awspds.refgenie.databio.org/rg.databio.org/ -a $GENOMES/archive -b refgenie_config_archive.yaml
+refgenie init -c $REFGENIE -f $GENOMES -u http://awspds.refgenie.databio.org/rg.databio.org/ -a $REFGENIE_ARCHIVE -b refgenie_config_archive.yaml
 ```
 
 ## Step 3: Build assets
