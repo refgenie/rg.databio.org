@@ -1,5 +1,5 @@
 config_version: 0.4
-genome_folder: /project/shefflab//deploy/rg.databio.org/genomes
+genome_folder: /project/shefflab//deploy/rg.databio.org_full/genomes
 genome_servers: 
  - http://refgenomes.databio.org
 remotes:
@@ -26,13 +26,14 @@ genomes:
             asset_parents: []
             asset_children: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bowtie2_index:default
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/salmon_index:default
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bismark_bt2_index:default
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bwa_index:default
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/star_index:default
-            archive_digest: f64cc334c8c694e47faaeb77b0abb112
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/hisat2_index:default
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/bismark_bt2_index:default
+            archive_digest: e1ed48f84544c5abec17cae5e99c7482
             archive_size: 8.6KB
-            asset_size: 39.9KB
-            legacy_archive_digest: 8b1492d826c5ccea0285e7ee845162aa
+            asset_size: 45.2KB
+            legacy_archive_digest: c238355abaf11e17f8c00c3ef3fc9f83
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -45,28 +46,57 @@ genomes:
               dir: .
             asset_parents: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
-            archive_digest: 4ffca9c7d255257f57fc38b7166dcdad
+            archive_digest: e27f4e23d216d89a81f8e3979071d147
             archive_size: 117.0KB
             asset_size: 8.1MB
             asset_children: []
-            legacy_archive_digest: c31a12dc62f2ee6576e88b18b4eba3be
+            legacy_archive_digest: c6c82dac596818dade518b83884a17f8
         default_tag: default
-      salmon_index:
-        asset_description: Transcriptome index for salmon, produced with salmon index
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
         tags:
           default:
-            asset_path: salmon_index
-            asset_digest: 74a0e463d958e7d6d070e656cdd84d45
+            asset_path: bwa_index
+            asset_digest: de383551ccf544bd9bbee7d4c529f39b
             seek_keys:
-              salmon_index: .
+              bwa_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4.fa
               dir: .
             asset_parents: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
-            archive_digest: a32873b621d401b4f87ed0214dd75deb
-            archive_size: 53.9KB
-            asset_size: 149.0KB
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: e4e0e12736f8ec4db297174f2d506bc0
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+            archive_digest: ca69236551d5938db87ec7a03d536048
+            archive_size: 8.7MB
+            asset_size: 1.5GB
             asset_children: []
-            legacy_archive_digest: e9892c3d5f5d3484eaf7c7f415d8bff0
+            legacy_archive_digest: 72260b351045583501969d0fed425c7a
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 706768c9f0ab8c61ef7cac4c5f0d57c4
+            seek_keys:
+              hisat2_index: 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4
+              dir: .
+            asset_parents: 
+             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+            archive_digest: 85e6731e456e3c26ccd02117f50263e2
+            archive_size: 82.9KB
+            asset_size: 4.1MB
+            asset_children: []
+            legacy_archive_digest: 5663f7fc20bb106d82055992f662d937
         default_tag: default
       bismark_bt2_index:
         asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
@@ -79,32 +109,278 @@ genomes:
               dir: .
             asset_parents: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
-            archive_digest: 5cdf5da4b23ea74a89d64362da974e96
+            archive_digest: e730aadf563a61fdd8d2909b37d0c3f4
             archive_size: 193.2KB
             asset_size: 16.2MB
             asset_children: []
-            legacy_archive_digest: 599b38e253dde8a20f4c34405eea6de1
+            legacy_archive_digest: 61c9a74b03c1402f3b560749b74e4460
         default_tag: default
-      star_index:
-        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
-        default_tag: default
-        tags:
-          default:
-            asset_path: star_index
-            seek_keys:
-              star_index: .
-              dir: .
-            archive_digest: ab8e963d3d2ea5dda76ebf92eaff7f67
-            archive_size: 8.7MB
-            asset_size: 1.5GB
-            asset_parents: 
-             - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
-            asset_children: []
-            asset_digest: f6f9bb70d98edb0b2e8914a77b5f7883
-            legacy_archive_digest: e8c24d1fa7bea21edc56b5b753e70316
     aliases: 
      - rCRSd
     genome_description: test description rCRSd
+  2230c535660fb4774114bfa966a62f823fdb6d21acf138d4:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 59fed5ec3c3a95bc5709b24b8f2cf7bf
+            seek_keys:
+              fasta: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa
+              fai: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa.fai
+              chrom_sizes: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/suffixerator_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bwa_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bowtie2_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/star_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/hisat2_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/cellranger_reference:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bismark_bt2_index:default
+            archive_digest: 4e94404ceab2b97f86afee1709d4f47e
+            archive_size: 833.4MB
+            asset_size: 2.9GB
+            legacy_archive_digest: ef17b7a4cc9c6874f32d16fe74184b7f
+        default_tag: default
+      gencode_gtf:
+        asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
+        tags:
+          default:
+            asset_path: gencode_gtf
+            asset_digest: 55cad7e24235fa842628a3c1f9542c1f
+            seek_keys:
+              gencode_gtf: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.gtf.gz
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/cellranger_reference:default
+            archive_digest: b81eebf84e1763842c8971d45836ef5c
+            archive_size: 36.7MB
+            asset_size: 37.6MB
+            legacy_archive_digest: 6ae377e85a7999dc7aa5da75899ca381
+        default_tag: default
+      refgene_anno:
+        asset_description: gene, TSS, exon, intron, and premature mRNA annotation files
+        tags:
+          default:
+            asset_path: refgene_anno
+            asset_digest: 4d0ff5d90ac529a4fffdd5704d8ec6d9
+            seek_keys:
+              refgene_anno: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_refGene.txt.gz
+              refgene_tss: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_TSS.bed
+              refgene_exon: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_exons.bed
+              refgene_intron: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_introns.bed
+              refgene_pre_mRNA: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_pre-mRNA.bed
+              dir: .
+            asset_parents: []
+            archive_digest: 3efa0258d0d887f2fdacf027594f29d9
+            archive_size: 13.7MB
+            asset_size: 27.9MB
+            asset_children: []
+            legacy_archive_digest: 9883e6f1573e075522e9874713870a76
+        default_tag: default
+      dbsnp:
+        asset_description: The database of single nucleotide polymorphisms (SNPs) and multiple small-scale variations that include insertions/deletions, microsatellites, and non-polymorphic variants
+        tags:
+          default:
+            asset_path: dbsnp
+            asset_digest: b17012507f8600ce2ff715d48368939d
+            seek_keys:
+              dbsnp: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbSNP.gz
+              tabix: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbSNP.gz.tbi
+              dir: .
+            asset_parents: []
+            archive_digest: ad6586ccabeedcf9fe5b2d41c43e072b
+            archive_size: 1.5GB
+            asset_size: 1.5GB
+            asset_children: []
+            legacy_archive_digest: 859f4789f940086fb0d8a5c40a8ba64b
+        default_tag: default
+      ensembl_gtf:
+        asset_description: Ensembl GTF, TSS, and gene body annotation
+        tags:
+          default:
+            asset_path: ensembl_gtf
+            asset_digest: 247fa6fbf98ce6b5773cbed0bdd86fef
+            seek_keys:
+              ensembl_gtf: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.gtf.gz
+              ensembl_tss: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_ensembl_TSS.bed
+              ensembl_gene_body: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_ensembl_gene_body.bed
+              dir: .
+            asset_parents: []
+            archive_digest: 1697939994ce71b225ea1c792616fa24
+            archive_size: 46.6MB
+            asset_size: 56.4MB
+            asset_children: []
+            legacy_archive_digest: 0d868266b9dd658edb2f875ad995b13e
+        default_tag: default
+      ensembl_rb:
+        asset_description: A regulatory annotation file
+        tags:
+          default:
+            asset_path: ensembl_rb
+            asset_digest: d743c316efe1e13ce8a2546fbe3adf69
+            seek_keys:
+              ensembl_rb: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.gff.gz
+              dir: .
+            asset_parents: []
+            archive_digest: 968f0de42335837c427715d5b2f44608
+            archive_size: 9.9MB
+            asset_size: 10.7MB
+            asset_children: []
+            legacy_archive_digest: 9252688e5eb494235888403f4e314ced
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: a90e2301049a1af60443c1ef03f4f9da
+            seek_keys:
+              esa: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.sft
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 6f8527e78c91fe17f9d08eddb1ddf570
+            seek_keys:
+              bwa_index: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+            archive_digest: 9cf6efedee66d8fe4d9e208dd3992f7b
+            archive_size: 3.2GB
+            asset_size: 5.1GB
+            asset_children: []
+            legacy_archive_digest: 048428d3c203aea18dd8a8d4ac442f0f
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 04880a3192a69bbfdc36da25b67203cb
+            seek_keys:
+              bowtie2_index: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+            archive_digest: 25cc75284e648c72ba029c29f6be63b9
+            archive_size: 3.5GB
+            asset_size: 3.9GB
+            asset_children: []
+            legacy_archive_digest: 059e6b56da3732bbfa25f7b78e2be224
+        default_tag: default
+      dbnsfp:
+        asset_description: A database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome (Gencode release 29/Ensembl 94)
+        tags:
+          default:
+            asset_path: dbnsfp
+            asset_digest: d41d8cd98f00b204e9800998ecf8427e
+            seek_keys:
+              dbnsfp: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz
+              tabix: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz.tbi
+              dir: .
+            asset_parents: []
+            archive_digest: 5a870bb99810a9d034decffca9cd9580
+            archive_size: 124B
+            asset_size: 25.8KB
+            asset_children: []
+            legacy_archive_digest: 345695b24b2a80edc6180117a15fb0f6
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 08b189ecc597b28961485f53c4746596
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+            archive_digest: 48c91242af71556e6095a03aaca7643c
+            archive_size: 24.3GB
+            asset_size: 26.9GB
+            asset_children: []
+            legacy_archive_digest: f99a2a9d02c6ae389766d5d7d67c6491
+        default_tag: default
+      fasta_txome:
+        asset_description: cDNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta_txome
+            asset_digest: e452acaa6f4b4f28c29ce6e06beb07e0
+            seek_keys:
+              fasta_txome: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa
+              fai: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa.fai
+              chrom_sizes: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 92f4515473541290855175a35beb401c
+            archive_size: 69.1MB
+            asset_size: 363.9MB
+            asset_children: []
+            legacy_archive_digest: 1fd9217232c8934217a4ccb73f05e55e
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: c77a00bdd0505d1d083c43eaec21debe
+            seek_keys:
+              hisat2_index: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+            archive_digest: f54c7f1ca70d5975d8089e636f3ac9a1
+            archive_size: 3.9GB
+            asset_size: 4.2GB
+            asset_children: []
+            legacy_archive_digest: 35238dad06e964ff8695ea934475eb8e
+        default_tag: default
+      cellranger_reference:
+        asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
+        tags:
+          default:
+            asset_path: cellranger_reference
+            asset_digest: f30c323d6d86ebea3bc66d7bda78eee3
+            seek_keys:
+              cellranger_reference: ref
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/gencode_gtf:default
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 3ad42e5278d5efa9ad62827faa0eb828
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+            archive_digest: acbec04c21c87110ea563a6f7f401290
+            archive_size: 7.5GB
+            asset_size: 13.6GB
+            asset_children: []
+            legacy_archive_digest: e863367be9c1200f1e12f29851d2bcd8
+        default_tag: default
+    aliases: 
+     - hg38
+    genome_description: test description hg38
   7319f9237651755047bc40d7f7a9770d42a537e840f4e105:
     assets:
       fasta:
@@ -120,12 +396,50 @@ genomes:
               dir: .
             asset_parents: []
             asset_children: 
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/suffixerator_index:default
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/bowtie2_index:default
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/bwa_index:default
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/star_index:default
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/hisat2_index:default
-            archive_digest: a7f5c18c05ead91593abd3a534630603
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/bismark_bt2_index:default
+            archive_digest: 54944f3c114d81c83591296c8ea084ea
             archive_size: 33.8KB
-            asset_size: 154.2KB
-            legacy_archive_digest: 0ccedc6e0e14e12b4d54db33b35ef4f7
+            asset_size: 159.6KB
+            legacy_archive_digest: 96f40233028cd077031970463ec44e40
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 58d34093e5f2e22721161b8fb5525378
+            seek_keys:
+              esa: 7319f9237651755047bc40d7f7a9770d42a537e840f4e105.sft
+              dir: .
+            asset_parents: 
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
+            archive_digest: 6318fd24a59884861cebf8b1df781cc7
+            archive_size: 539.4KB
+            asset_size: 1.3MB
+            asset_children: []
+            legacy_archive_digest: 584ae6d5cae795f5788314b85e0078aa
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 1598194faca91ba44f87e473baf3c5aa
+            seek_keys:
+              bowtie2_index: 7319f9237651755047bc40d7f7a9770d42a537e840f4e105
+              dir: .
+            asset_parents: 
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
+            archive_digest: a09efca2b9b3790262b90cc2b100bef2
+            archive_size: 415.2KB
+            asset_size: 8.2MB
+            asset_children: []
+            legacy_archive_digest: a11dffae6771474b3231029c90db5bd4
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -138,11 +452,28 @@ genomes:
               dir: .
             asset_parents: 
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
-            archive_digest: 2384d87244996ff2c44cc7e6f50b55bb
+            archive_digest: 0f408be2540adf21fab352c369306048
             archive_size: 130.8KB
             asset_size: 252.7KB
             asset_children: []
-            legacy_archive_digest: 88b64fc776da424b098cebf094cfa637
+            legacy_archive_digest: 298b18952b45ae565628141399ecae6e
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 0accd888dd6912cb8d2785a59a689fdd
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
+            archive_digest: f7dbcddbce5e095fa86cc768c2cf5c15
+            archive_size: 17.1MB
+            asset_size: 1.5GB
+            asset_children: []
+            legacy_archive_digest: 5e9034aba67c6e5ae12fb3128f5294c6
         default_tag: default
       hisat2_index:
         asset_description: Genome index for HISAT2, produced with hisat2-build
@@ -155,11 +486,28 @@ genomes:
               dir: .
             asset_parents: 
              - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
-            archive_digest: 9d16a0c29f8f5db94ad53820ed9bedd2
+            archive_digest: c66354164119af89e4813b8e6f0587e9
             archive_size: 348.6KB
             asset_size: 4.6MB
             asset_children: []
-            legacy_archive_digest: 9f5da94bf1a8a0e60aa38e50c5567675
+            legacy_archive_digest: da8a23cf1827db41925e5e0c976fd463
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 1624049ab044ee728aa40470e6ef72fa
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 7319f9237651755047bc40d7f7a9770d42a537e840f4e105/fasta:default
+            archive_digest: d5771b28f8e013f09f9deca70963b45b
+            archive_size: 554.7KB
+            asset_size: 16.7MB
+            asset_children: []
+            legacy_archive_digest: bb6a8034124c58594717b55c71980d92
         default_tag: default
     aliases: 
      - human_repeats
@@ -179,29 +527,33 @@ genomes:
               dir: .
             asset_parents: []
             asset_children: 
-             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/bwa_index:default
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/suffixerator_index:default
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/bowtie2_index:default
-            archive_digest: 50de20ae9e13ccb8d8cbad79f360e272
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/bwa_index:default
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/star_index:default
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/hisat2_index:default
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/bismark_bt2_index:default
+            archive_digest: 95f40234ff82bcb20a105f1ccf5f7e66
             archive_size: 9.1KB
-            asset_size: 39.4KB
-            legacy_archive_digest: 104d77ad2ec855ad4060687ed699e524
+            asset_size: 44.8KB
+            legacy_archive_digest: e47407df6ca213d5a37785a88073b380
         default_tag: default
-      bwa_index:
-        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
         tags:
           default:
-            asset_path: bwa_index
-            asset_digest: 914dec83dcfab73e056717d33ecfd465
+            asset_path: suffixerator_index
+            asset_digest: 052309ba88ab260c846fb649cfd0243e
             seek_keys:
-              bwa_index: 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a.fa
+              esa: 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a.sft
               dir: .
             asset_parents: 
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
-            archive_digest: 72bd61909c03ff4b75626db9fdef69ae
-            archive_size: 32.2KB
-            asset_size: 61.8KB
+            archive_digest: 093407b8e61db3d1eb922d8ed3f18a0c
+            archive_size: 178.8KB
+            asset_size: 553.1KB
             asset_children: []
-            legacy_archive_digest: 16ebac5f1fe6e09ef4dbe4119cf65b92
+            legacy_archive_digest: 43d9c4472cfb529260ba31e16fe24402
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -214,46 +566,2067 @@ genomes:
               dir: .
             asset_parents: 
              - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
-            archive_digest: 4ca7d55ae839f3a98773ade837de7841
+            archive_digest: a04542a01626deee79e263aec6419e4d
             archive_size: 119.7KB
             asset_size: 8.1MB
             asset_children: []
-            legacy_archive_digest: fd42bee217868694385ed8f8756db14d
+            legacy_archive_digest: 72a1ee9cbc3202f38bb1c3bb9831b1e5
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 914dec83dcfab73e056717d33ecfd465
+            seek_keys:
+              bwa_index: 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a.fa
+              dir: .
+            asset_parents: 
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
+            archive_digest: e7a565af7795d88e7aeec67b5a3c9f0f
+            archive_size: 32.2KB
+            asset_size: 61.8KB
+            asset_children: []
+            legacy_archive_digest: 2329ec8c8bbee038b5b6be9750353c71
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: db8040c4458023ab11d5c39e7641e3f9
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
+            archive_digest: ff7f3ac370fd8f24e16447b7fd5028d3
+            archive_size: 8.6MB
+            asset_size: 1.5GB
+            asset_children: []
+            legacy_archive_digest: 292474d1fd76496a1189f2e21d483226
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 7f1d4d5ce596db71889308055eea48ba
+            seek_keys:
+              hisat2_index: 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a
+              dir: .
+            asset_parents: 
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
+            archive_digest: 0bbf8860ee8e9d342c77c6ebdc9d857e
+            archive_size: 81.2KB
+            asset_size: 4.1MB
+            asset_children: []
+            legacy_archive_digest: b2fe7f70e0c1697ac574619a167c6e3f
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 302e3d56e1508ed16e38a860fd76a19a
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a/fasta:default
+            archive_digest: 1e33472a39a07a8617076288bd3cd2b9
+            archive_size: 196.2KB
+            asset_size: 16.2MB
+            asset_children: []
+            legacy_archive_digest: 05acf95a39a07fa970f0a09fc6f0f30e
         default_tag: default
     aliases: 
      - mouse_chrM2x
     genome_description: test description mouse chrM2x
-  2230c535660fb4774114bfa966a62f823fdb6d21acf138d4:
+  4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87:
     assets:
       fasta:
         asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
         tags:
           default:
             asset_path: fasta
-            asset_digest: 59fed5ec3c3a95bc5709b24b8f2cf7bf
+            asset_digest: 456bf4dd716de36373539acf2595baf3
             seek_keys:
-              fasta: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa
-              fai: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.fa.fai
-              chrom_sizes: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.chrom.sizes
+              fasta: 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87.fa
+              fai: 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87.fa.fai
+              chrom_sizes: 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 5e28cb6a4abad04026844b9ba7bb9d80
+            archive_size: 26.4MB
+            asset_size: 129.8MB
+            asset_children: []
+            legacy_archive_digest: 08d71ecd74c9f63b52439a0caf407522
+        default_tag: default
+    aliases: 
+     - hg18_cdna
+    genome_description: No description
+  45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: eddf5466faa3391a7114e87648466dcb
+            seek_keys:
+              fasta: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9.fa
+              fai: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9.fa.fai
+              chrom_sizes: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9.chrom.sizes
               dir: .
             asset_parents: []
             asset_children: 
-             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bowtie2_index:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/suffixerator_index:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/bowtie2_index:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/bwa_index:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/star_index:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/hisat2_index:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/bismark_bt2_index:default
+            archive_digest: c4c385aabfdc226f17834899c046209f
+            archive_size: 1.7MB
+            asset_size: 6.0MB
+            legacy_archive_digest: 0c455df3e8a6733cb1b8c8062652a216
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: d6e773bc8e4f48ab2cf7bc580dce8b7c
+            seek_keys:
+              esa: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9.sft
+              dir: .
+            asset_parents: 
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/fasta:default
+            archive_digest: f8be0c07434d2cc6ab94e579d6c122a7
+            archive_size: 25.1MB
+            asset_size: 53.1MB
+            asset_children: []
+            legacy_archive_digest: 89c28f1231d8238a24d659153a30c1b9
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
         tags:
           default:
             asset_path: bowtie2_index
-            asset_digest: 04880a3192a69bbfdc36da25b67203cb
+            asset_digest: 058ee9cd319d1febd70b328af68eed1a
             seek_keys:
-              bowtie2_index: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4
+              bowtie2_index: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9
               dir: .
             asset_parents: 
-             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/fasta:default
+            archive_digest: 74996fc4e509dd74dfbc101048ccc9cf
+            archive_size: 8.8MB
+            asset_size: 16.4MB
+            asset_children: []
+            legacy_archive_digest: 1ba3a133b96799bfa461f5903bc7e584
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 0e960702cf0cc29e3aba6d7868e988db
+            seek_keys:
+              bwa_index: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9.fa
+              dir: .
+            asset_parents: 
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/fasta:default
+            archive_digest: a0820a40bca6f8a372021bbdc7ef8072
+            archive_size: 5.7MB
+            asset_size: 9.9MB
+            asset_children: []
+            legacy_archive_digest: f2c31005cd05484bede5c9910e409da2
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: c0e4985c6d8c02c6a53c6bffcde0535d
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/fasta:default
+            archive_digest: 03e6ef7922152ef7c756172e124959b7
+            archive_size: 244.3MB
+            asset_size: 2.1GB
+            asset_children: []
+            legacy_archive_digest: befc2ccb51a7f5687fdfa1a69a56ed5f
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 570fe2908c7fd61f35d162966b06e803
+            seek_keys:
+              hisat2_index: 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9
+              dir: .
+            asset_parents: 
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/fasta:default
+            archive_digest: 5f14f05b1cd0c7892f7facf648f9ea3a
+            archive_size: 12.2MB
+            asset_size: 30.7MB
+            asset_children: []
+            legacy_archive_digest: a00bb08f1de64049becaa6dccf7a466d
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 249565902eeb98e99ad89d5c0b91ec44
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9/fasta:default
+            archive_digest: 06c43eafdde0e13bf25bd89e51ba9613
+            archive_size: 14.3MB
+            asset_size: 43.4MB
+            asset_children: []
+            legacy_archive_digest: 646884e4a94ab63d0079c218a9fff8f8
         default_tag: default
     aliases: 
-     - hg38
-    genome_description: test description hg38
-genome_archive_folder: /project/shefflab//deploy/rg.databio.org/genomes/archive
+     - hs38d1
+    genome_description: No description
+  9a02d64909100f146272f8e16563178e9e93c218b1126ff9:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: e452acaa6f4b4f28c29ce6e06beb07e0
+            seek_keys:
+              fasta: 9a02d64909100f146272f8e16563178e9e93c218b1126ff9.fa
+              fai: 9a02d64909100f146272f8e16563178e9e93c218b1126ff9.fa.fai
+              chrom_sizes: 9a02d64909100f146272f8e16563178e9e93c218b1126ff9.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: c8440c42470a7d16af3bd571577e0449
+            archive_size: 69.1MB
+            asset_size: 363.9MB
+            asset_children: []
+            legacy_archive_digest: ee2ca0f883b4a0d31ac5b5d3b5fecdcc
+        default_tag: default
+    aliases: 
+     - hg38_cdna
+    genome_description: No description
+  d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: b776fbe954753566849d413c5e7d3fed
+            seek_keys:
+              fasta: d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89.fa
+              fai: d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89.fa.fai
+              chrom_sizes: d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 4492d1c0f0fcbaba252195173426f6b4
+            archive_size: 20.2MB
+            asset_size: 75.4MB
+            asset_children: []
+            legacy_archive_digest: 28c75cd20522f41c41dcf9fc6e0d4a07
+        default_tag: default
+    aliases: 
+     - rn6_cdna
+    genome_description: No description
+  fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 8192beb5916da1fdc5640b529fc7bb97
+            seek_keys:
+              fasta: fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca.fa
+              fai: fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca.fa.fai
+              chrom_sizes: fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: a0427e0f24a8903bee8ae294cfe61a03
+            archive_size: 51.6MB
+            asset_size: 247.6MB
+            asset_children: []
+            legacy_archive_digest: e10482eb2e3623427e9d4847a79d023a
+        default_tag: default
+    aliases: 
+     - mm10_cdna
+    genome_description: No description
+  fc77e33fa26398662380748a62ab6279dab2a637256acd89:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: e146e5c1b8fd57b9f09ab46ec36adbad
+            seek_keys:
+              fasta: fc77e33fa26398662380748a62ab6279dab2a637256acd89.fa
+              fai: fc77e33fa26398662380748a62ab6279dab2a637256acd89.fa.fai
+              chrom_sizes: fc77e33fa26398662380748a62ab6279dab2a637256acd89.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 3e10ce65ba9475d2d327995fccb22c4b
+            archive_size: 60.7MB
+            asset_size: 315.1MB
+            asset_children: []
+            legacy_archive_digest: be31e463cb5a917c9bca3404ebbaef5d
+        default_tag: default
+    aliases: 
+     - hg19_cdna
+    genome_description: No description
+  fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: f197c1ac4b3e4c5dd013bd2021bb32e6
+            seek_keys:
+              fasta: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7.fa
+              fai: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7.fa.fai
+              chrom_sizes: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/suffixerator_index:default
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/bowtie2_index:default
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/bwa_index:default
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/star_index:default
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/hisat2_index:default
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/bismark_bt2_index:default
+            archive_digest: 38a8f14d5eb95ac23c95752c4a17f56d
+            archive_size: 11.7MB
+            asset_size: 41.4MB
+            legacy_archive_digest: 998ae591c71f571f6398db8e8f7680fd
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: b109666768e027c5b333aa09c372da6a
+            seek_keys:
+              esa: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7.sft
+              dir: .
+            asset_parents: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/fasta:default
+            archive_digest: fad2282b25e173a0202d9dd3d1fa0225
+            archive_size: 209.0MB
+            asset_size: 418.4MB
+            asset_children: []
+            legacy_archive_digest: e7281722def3d97dccc68552b3b4cb75
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: f756f8dd195756b78e2f9dfbb9146fcf
+            seek_keys:
+              bowtie2_index: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7
+              dir: .
+            asset_parents: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/fasta:default
+            archive_digest: b9b7aec64b7f5c82065d48fd1a230af7
+            archive_size: 52.6MB
+            asset_size: 65.7MB
+            asset_children: []
+            legacy_archive_digest: eb1d2e3b76eaa4ccab26ae4e74cb1f7e
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 30166540072e3a4a927e548909ab4b7e
+            seek_keys:
+              bwa_index: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7.fa
+              dir: .
+            asset_parents: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/fasta:default
+            archive_digest: ba05ab6037d6a6e9c92958f2d401b671
+            archive_size: 43.7MB
+            asset_size: 71.4MB
+            asset_children: []
+            legacy_archive_digest: c6f006301e29d552738ad86c5fb4bc20
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 19ecbb0caff60fc22533daff46654335
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/fasta:default
+            archive_digest: 83e06841f90b72d504228909b687ad2c
+            archive_size: 862.4MB
+            asset_size: 1.8GB
+            asset_children: []
+            legacy_archive_digest: b581e13791fc3bb8b3d870fa9c21bb0e
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: fcfb9237ec19cc3c414add5ace4b5659
+            seek_keys:
+              hisat2_index: fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7
+              dir: .
+            asset_parents: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/fasta:default
+            archive_digest: f8ad6ed5059d32f16dc1e5472157c671
+            archive_size: 58.3MB
+            asset_size: 66.4MB
+            asset_children: []
+            legacy_archive_digest: 9e3ce43017e3b62c7f9ae0e9c60fdb48
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: a79889b8cc0e7fbda6d3ca3cd9c6e651
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7/fasta:default
+            archive_digest: e93dfd06b7939d24d84af1ccfdf90ab4
+            archive_size: 106.8MB
+            asset_size: 214.1MB
+            asset_children: []
+            legacy_archive_digest: 17361dbb65c61cd350f65a5f6e4a1e18
+        default_tag: default
+    aliases: 
+     - hg38_chr22
+    genome_description: No description
+  baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 7ce3b03e30d6ef76af8c3ad09a141dfc
+            seek_keys:
+              fasta: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.fa
+              fai: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.fa.fai
+              chrom_sizes: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/suffixerator_index:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/bowtie2_index:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/bwa_index:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/hisat2_index:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/star_index:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/cellranger_reference:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/bismark_bt2_index:default
+            archive_digest: 80cef56fafce40329d9fb7784e12ac24
+            archive_size: 905.3MB
+            asset_size: 3.0GB
+            legacy_archive_digest: 75a636a41343312de081118dbf097dff
+        default_tag: default
+      gencode_gtf:
+        asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
+        tags:
+          default:
+            asset_path: gencode_gtf
+            asset_digest: 3ecbecc25451ce6ae3557a4011510d73
+            seek_keys:
+              gencode_gtf: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.gtf.gz
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/cellranger_reference:default
+            archive_digest: d24d49d38b6837a2a9c8e5f529dc274e
+            archive_size: 52.3MB
+            asset_size: 53.9MB
+            legacy_archive_digest: dac31478ebf13ec1305d079137f1f1b8
+        default_tag: default
+      refgene_anno:
+        asset_description: gene, TSS, exon, intron, and premature mRNA annotation files
+        tags:
+          default:
+            asset_path: refgene_anno
+            asset_digest: f4e6d4a88c21af08d61443abcb5b7d4b
+            seek_keys:
+              refgene_anno: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_refGene.txt.gz
+              refgene_tss: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_TSS.bed
+              refgene_exon: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_exons.bed
+              refgene_intron: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_introns.bed
+              refgene_pre_mRNA: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_pre-mRNA.bed
+              dir: .
+            asset_parents: []
+            archive_digest: f15cf15cc869e6151275ee8e62d82ea1
+            archive_size: 12.7MB
+            asset_size: 25.3MB
+            asset_children: []
+            legacy_archive_digest: c00e01eed16ca8f95c48366d13b80c9a
+        default_tag: default
+      dbsnp:
+        asset_description: The database of single nucleotide polymorphisms (SNPs) and multiple small-scale variations that include insertions/deletions, microsatellites, and non-polymorphic variants
+        tags:
+          default:
+            asset_path: dbsnp
+            asset_digest: 6564a0e963d04c4f6ee34f3d6e27361d
+            seek_keys:
+              dbsnp: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_dbSNP.gz
+              tabix: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_dbSNP.gz.tbi
+              dir: .
+            asset_parents: []
+            archive_digest: e32f9a6ee8382a975648b35f4cf59bf1
+            archive_size: 1.5GB
+            asset_size: 1.5GB
+            asset_children: []
+            legacy_archive_digest: f53cef9eed715c4734572b9b338b9637
+        default_tag: default
+      ensembl_gtf:
+        asset_description: Ensembl GTF, TSS, and gene body annotation
+        tags:
+          default:
+            asset_path: ensembl_gtf
+            asset_digest: 4091614d92520751bebf268dbdc74490
+            seek_keys:
+              ensembl_gtf: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.gtf.gz
+              ensembl_tss: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_ensembl_TSS.bed
+              ensembl_gene_body: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_ensembl_gene_body.bed
+              dir: .
+            asset_parents: []
+            archive_digest: 6cf20964f3f01ee9e7cb025b0aaa559b
+            archive_size: 42.5MB
+            asset_size: 51.3MB
+            asset_children: []
+            legacy_archive_digest: 4e8b01c8a258c76db7a3c66d9cea9eab
+        default_tag: default
+      ensembl_rb:
+        asset_description: A regulatory annotation file
+        tags:
+          default:
+            asset_path: ensembl_rb
+            asset_digest: 78f1eee3e054f029677d93f782235c87
+            seek_keys:
+              ensembl_rb: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.gff.gz
+              dir: .
+            asset_parents: []
+            archive_digest: 0d8ab27b19ddde4afa9db5528b8d4c9d
+            archive_size: 8.1MB
+            asset_size: 8.8MB
+            asset_children: []
+            legacy_archive_digest: 3f16ccd6211adb907dd0da3a1de7668a
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 961a234429ce16b86fc3ef46f5ef533f
+            seek_keys:
+              esa: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.sft
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 6d7b0d35fa090a2d1d93f4e6c68dbe33
+            seek_keys:
+              bowtie2_index: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: bfe29f70c26f6ab10089e7e8865c6ace
+            archive_size: 3.5GB
+            asset_size: 3.8GB
+            asset_children: []
+            legacy_archive_digest: 5f226b88dbca15a913d043cd26caf923
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: f1024e230dc0176db46ccb69b7e187e0
+            seek_keys:
+              bwa_index: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.fa
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: 0843b3190c6bc57369bf3056b3e5104a
+            archive_size: 3.2GB
+            asset_size: 5.1GB
+            asset_children: []
+            legacy_archive_digest: bc90fbb06db57f900facb958a2b6ddc5
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 801a19177b5a9ef13c201de57492463e
+            seek_keys:
+              hisat2_index: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: 9215afeb02e7f1bafd0a3a7d9dc4c68a
+            archive_size: 3.9GB
+            asset_size: 4.1GB
+            asset_children: []
+            legacy_archive_digest: 714f22df73fc64b623f24802f553108c
+        default_tag: default
+      fasta_txome:
+        asset_description: cDNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta_txome
+            asset_digest: e146e5c1b8fd57b9f09ab46ec36adbad
+            seek_keys:
+              fasta_txome: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.fa
+              fai: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.fa.fai
+              chrom_sizes: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 9727d295f5e88426d228257870413006
+            archive_size: 60.7MB
+            asset_size: 315.1MB
+            asset_children: []
+            legacy_archive_digest: e53b3d1966ca98db263286f2e7389a44
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 3db00cbcdd1c60b924910bbe14d76dcd
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+        default_tag: default
+      cellranger_reference:
+        asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
+        tags:
+          default:
+            asset_path: cellranger_reference
+            asset_digest: 7dc30c8d468b8617d309118d7be59eaa
+            seek_keys:
+              cellranger_reference: ref
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/gencode_gtf:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 1b1f24fa51e10fc861b3b8a25991f6ff
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+        default_tag: default
+    aliases: 
+     - hg19
+    genome_description: No description
+  9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 0fc1d00b994befc9a00695b15b048af8
+            seek_keys:
+              fasta: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.fa
+              fai: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.fa.fai
+              chrom_sizes: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/bowtie2_index:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/suffixerator_index:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/bwa_index:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/hisat2_index:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/star_index:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/cellranger_reference:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/bismark_bt2_index:default
+            archive_digest: 087169053a7e0269b6de875a21e81773
+            archive_size: 899.7MB
+            asset_size: 3.0GB
+            legacy_archive_digest: d1d22547d274bd38edcd4df9f202a8e3
+        default_tag: default
+      gencode_gtf:
+        asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
+        tags:
+          default:
+            asset_path: gencode_gtf
+            asset_digest: f08089c9fb04f4d48cb76d703877cb47
+            seek_keys:
+              gencode_gtf: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.gtf.gz
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/cellranger_reference:default
+            archive_digest: 0ef9a7aeed1efeab0ada207b27839b9e
+            archive_size: 17.2MB
+            asset_size: 18.7MB
+            legacy_archive_digest: 3193e4f542fe7ee446e160c302abe38b
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 0861cc93ec5e00d5069196f512da3d92
+            seek_keys:
+              bowtie2_index: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+            archive_digest: 7917dd53f7b30a81ae0b19d312405377
+            archive_size: 3.5GB
+            asset_size: 3.8GB
+            asset_children: []
+            legacy_archive_digest: 0134d660e6d25464a4cf15efb75c07e8
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 709146b0d3bfce3a5e4b19873cd763c6
+            seek_keys:
+              esa: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.sft
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: d4c64ed81b3d52c17202659b915b804b
+            seek_keys:
+              bwa_index: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.fa
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+            archive_digest: acc0e38cb4bbdf3acb66e3adfefc03d4
+            archive_size: 3.2GB
+            asset_size: 5.1GB
+            asset_children: []
+            legacy_archive_digest: 9c6589e987f28973096a9d539e7ae913
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 0ac7d3e119d2672b2c9181044f3f7733
+            seek_keys:
+              hisat2_index: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+            archive_digest: 4124e7d8af0efa7cdea76181c3346524
+            archive_size: 3.9GB
+            asset_size: 4.1GB
+            asset_children: []
+            legacy_archive_digest: 23ad59cd980122ac4c1698f8e3639d80
+        default_tag: default
+      fasta_txome:
+        asset_description: cDNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta_txome
+            asset_digest: 456bf4dd716de36373539acf2595baf3
+            seek_keys:
+              fasta_txome: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.fa
+              fai: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.fa.fai
+              chrom_sizes: 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 161aef37fd4d7974f7127335ac7c9cd0
+            archive_size: 26.4MB
+            asset_size: 129.8MB
+            asset_children: []
+            legacy_archive_digest: 7c6a064a37c88ac14546260c74a49739
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 45331ae2a7b9df25955623eac07585d1
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+        default_tag: default
+      cellranger_reference:
+        asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
+        tags:
+          default:
+            asset_path: cellranger_reference
+            asset_digest: 30fe9e8250482cfecba2801ef15d7c38
+            seek_keys:
+              cellranger_reference: ref
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/gencode_gtf:default
+            archive_digest: 559ebc7ebe3886c083a1170935510fcd
+            archive_size: 10.4GB
+            asset_size: 16.5GB
+            asset_children: []
+            legacy_archive_digest: b953fc9083a75af8695b156c4613f3d0
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 68c9fc012afea08096464d3f5dafe0d4
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+        default_tag: default
+    aliases: 
+     - hg18
+    genome_description: No description
+  74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 9e8fa06e6125f89be4fb974879cb91a6
+            seek_keys:
+              fasta: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46.fa
+              fai: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46.fa.fai
+              chrom_sizes: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/suffixerator_index:default
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/bowtie2_index:default
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/bwa_index:default
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/hisat2_index:default
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/bismark_bt2_index:default
+            archive_digest: 6e076b966992dcade956b1fa560cc8a8
+            archive_size: 825B
+            asset_size: 10.3KB
+            legacy_archive_digest: b205e8eb5cf77310914a41976df1e379
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 440f0b31b44f91d9d16b16eb507957b9
+            seek_keys:
+              esa: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46.sft
+              dir: .
+            asset_parents: 
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/fasta:default
+            archive_digest: b08865b3a00e84ca959f3daf7e670de4
+            archive_size: 9.2KB
+            asset_size: 29.8KB
+            asset_children: []
+            legacy_archive_digest: 06093d14a46c48a65a72df1dd17789e3
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 143b092c594de283a0147797699890e1
+            seek_keys:
+              bowtie2_index: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46
+              dir: .
+            asset_parents: 
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/fasta:default
+            archive_digest: a95a60fa2eb81c0f07775017c4f72c50
+            archive_size: 16.9KB
+            asset_size: 8.0MB
+            asset_children: []
+            legacy_archive_digest: 74080729d61786e28bebb8b7fec4079c
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 569e7f34dc5fa323c8aca50f1b278004
+            seek_keys:
+              bwa_index: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46.fa
+              dir: .
+            asset_parents: 
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/fasta:default
+            archive_digest: 00c9331368da6c07380708692ec8ab79
+            archive_size: 2.7KB
+            asset_size: 10.7KB
+            asset_children: []
+            legacy_archive_digest: a37da8a955c116aa659949f3e5417539
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 2d31cbfc37fd3cedc78e6d58662cfe6a
+            seek_keys:
+              hisat2_index: 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46
+              dir: .
+            asset_parents: 
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/fasta:default
+            archive_digest: 164dc1b3496c312bede6d9962985f688
+            archive_size: 14.2KB
+            asset_size: 4.1MB
+            asset_children: []
+            legacy_archive_digest: d55124b28981880d2b64280063867525
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 8270c6a65598364dcecf48c733f36e68
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46/fasta:default
+            archive_digest: 3f8975884c323ed2ad6155958907a919
+            archive_size: 32.1KB
+            asset_size: 16.0MB
+            asset_children: []
+            legacy_archive_digest: a98fc5fd5272a8d07d8c2cbb835e3829
+        default_tag: default
+    aliases: 
+     - human_alu
+    genome_description: No description
+  b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: e18c0446f55f2584bf58f04076400ce6
+            seek_keys:
+              fasta: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8.fa
+              fai: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8.fa.fai
+              chrom_sizes: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/suffixerator_index:default
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/bowtie2_index:default
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/bwa_index:default
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/star_index:default
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/hisat2_index:default
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/bismark_bt2_index:default
+            archive_digest: a84158548986648e8a3b856c93371243
+            archive_size: 12.5KB
+            asset_size: 49.9KB
+            legacy_archive_digest: 6756065ce45c93ed3863291e286c8798
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 7d59b94db99aabdbed46d55253d9b69e
+            seek_keys:
+              esa: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8.sft
+              dir: .
+            asset_parents: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/fasta:default
+            archive_digest: 9e4131f2c1950a979c3009b8120523b3
+            archive_size: 150.4KB
+            asset_size: 396.6KB
+            asset_children: []
+            legacy_archive_digest: 06b22ee080dfffde986a0e46aaa1e78a
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: a794ca7b0183e614855533d5407cf199
+            seek_keys:
+              bowtie2_index: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8
+              dir: .
+            asset_parents: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/fasta:default
+            archive_digest: 2eed6f82422e73fcf8a2c0fee586db66
+            archive_size: 203.4KB
+            asset_size: 8.1MB
+            asset_children: []
+            legacy_archive_digest: a024b57dc3599c7fbca39d50bddf7b17
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: aa0e2c0cfa502a5041e140e1e11c4259
+            seek_keys:
+              bwa_index: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8.fa
+              dir: .
+            asset_parents: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/fasta:default
+            archive_digest: 0b824278b1180697f1a11777088afc5c
+            archive_size: 45.0KB
+            asset_size: 79.8KB
+            asset_children: []
+            legacy_archive_digest: 0545748c9fc0aa808648adbdbf414443
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: b034ed7c99a258969dee4615e9441226
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/fasta:default
+            archive_digest: c647b7c6796dc593caf2c92af65a173a
+            archive_size: 11.7MB
+            asset_size: 1.5GB
+            asset_children: []
+            legacy_archive_digest: 16d97c8a2e14422ca679c89cbd369fbd
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 67ac57af5e08317fcbfefe25c87cbd90
+            seek_keys:
+              hisat2_index: b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8
+              dir: .
+            asset_parents: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/fasta:default
+            archive_digest: c2af915448abdc7e86d41f5e921069c5
+            archive_size: 137.2KB
+            asset_size: 4.1MB
+            asset_children: []
+            legacy_archive_digest: a0b16079c8787e4fef68f745d1515876
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 46c9b8628e6f3ff2545735217e018465
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8/fasta:default
+            archive_digest: 5b702154965a2b306dae14feac6117c6
+            archive_size: 284.5KB
+            asset_size: 16.2MB
+            asset_children: []
+            legacy_archive_digest: 2b2908e310c98abdb3e244d683d9cdb0
+        default_tag: default
+    aliases: 
+     - human_rDNA
+    genome_description: No description
+  3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 5b2d2705cff9c9315add79b3f0d793ad
+            seek_keys:
+              fasta: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475.fa
+              fai: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475.fa.fai
+              chrom_sizes: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/suffixerator_index:default
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/bowtie2_index:default
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/bwa_index:default
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/star_index:default
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/hisat2_index:default
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/bismark_bt2_index:default
+            archive_digest: 30951d472f34a8239c9b57289853fa83
+            archive_size: 21.1KB
+            asset_size: 108.4KB
+            legacy_archive_digest: dedf8546fc2882b028412594d8132b9e
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 878a08f12e8106c43fd8a4f5aff91288
+            seek_keys:
+              esa: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475.sft
+              dir: .
+            asset_parents: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/fasta:default
+            archive_digest: bdad5e67916931f4664bef7e29849c67
+            archive_size: 371.2KB
+            asset_size: 896.4KB
+            asset_children: []
+            legacy_archive_digest: 736629d3ad89ccf5cee271514bb2e99f
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 16feb93bb7c12665b69ea15dde114c15
+            seek_keys:
+              bowtie2_index: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475
+              dir: .
+            asset_parents: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/fasta:default
+            archive_digest: e5810e903815eefe5f604af425bb3274
+            archive_size: 232.6KB
+            asset_size: 8.1MB
+            asset_children: []
+            legacy_archive_digest: 2d0686de025eb15af0848777e65accda
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 5a834499ee32a0dcf93ec09d80519159
+            seek_keys:
+              bwa_index: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475.fa
+              dir: .
+            asset_parents: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/fasta:default
+            archive_digest: 917462f14021466f97901e9d99b5edaf
+            archive_size: 81.5KB
+            asset_size: 174.4KB
+            asset_children: []
+            legacy_archive_digest: 1d174ee8b06bf3f5f66fe68da6bb982a
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 253fc7468595828090d3739a41c483f0
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/fasta:default
+            archive_digest: 7432ca7c1cb3d1f03ccdf9a5d2e46f34
+            archive_size: 10.8MB
+            asset_size: 1.5GB
+            asset_children: []
+            legacy_archive_digest: 74790cdc8987feaaf69d268946b7b28a
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 2e6d096d627e2753ebf7682311160217
+            seek_keys:
+              hisat2_index: 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475
+              dir: .
+            asset_parents: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/fasta:default
+            archive_digest: 6be094f2ef420d53ec16b753edec4e2e
+            archive_size: 217.9KB
+            asset_size: 4.5MB
+            asset_children: []
+            legacy_archive_digest: 4cc66a4679e5893d7023aaa7e8986c71
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 01165c5ed39efd7c6c01ea9775dc59ce
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475/fasta:default
+            archive_digest: cb9c068a92e1d7826fd468312a9bb181
+            archive_size: 350.6KB
+            asset_size: 16.5MB
+            asset_children: []
+            legacy_archive_digest: 8e47f8053b634ba1b8a6020fba1a16d5
+        default_tag: default
+    aliases: 
+     - human_alphasat
+    genome_description: No description
+  0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 4afce2deeceae65b4c0987b9297cf441
+            seek_keys:
+              fasta: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.fa
+              fai: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.fa.fai
+              chrom_sizes: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/suffixerator_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/bwa_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/bowtie2_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/hisat2_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/star_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/cellranger_reference:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/bismark_bt2_index:default
+            archive_digest: bfe552cb778db3777e88972ea645557d
+            archive_size: 763.4MB
+            asset_size: 2.6GB
+            legacy_archive_digest: 19daa4a42e81c99c4ce0686796a98dee
+        default_tag: default
+      gencode_gtf:
+        asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
+        tags:
+          default:
+            asset_path: gencode_gtf
+            asset_digest: 83a765227a92b2bfa774378eacf9b660
+            seek_keys:
+              gencode_gtf: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.gtf.gz
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/cellranger_reference:default
+            archive_digest: ab48acef7a90c184aea1a1c9aeef200a
+            archive_size: 26.2MB
+            asset_size: 27.0MB
+            legacy_archive_digest: 4fdc1a5504095d26010bc26913bb49cc
+        default_tag: default
+      refgene_anno:
+        asset_description: gene, TSS, exon, intron, and premature mRNA annotation files
+        tags:
+          default:
+            asset_path: refgene_anno
+            asset_digest: 9fedaa9f51594545103495fcc32b8903
+            seek_keys:
+              refgene_anno: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_refGene.txt.gz
+              refgene_tss: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_TSS.bed
+              refgene_exon: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_exons.bed
+              refgene_intron: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_introns.bed
+              refgene_pre_mRNA: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_pre-mRNA.bed
+              dir: .
+            asset_parents: []
+            archive_digest: a462e06df539da897840e9cdf7802996
+            archive_size: 9.2MB
+            asset_size: 19.7MB
+            asset_children: []
+            legacy_archive_digest: 7a08d1519f2e6b45f89978086583429e
+        default_tag: default
+      ensembl_gtf:
+        asset_description: Ensembl GTF, TSS, and gene body annotation
+        tags:
+          default:
+            asset_path: ensembl_gtf
+            asset_digest: 1f79aef492221ed46fb75cfd7fe345ba
+            seek_keys:
+              ensembl_gtf: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.gtf.gz
+              ensembl_tss: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_ensembl_TSS.bed
+              ensembl_gene_body: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_ensembl_gene_body.bed
+              dir: .
+            asset_parents: []
+            archive_digest: 08f20bfebe21504d57a5a1d04f9398a2
+            archive_size: 30.5MB
+            asset_size: 37.8MB
+            asset_children: []
+            legacy_archive_digest: e2be8cdbb9da92e69af4bdc43c46c8fc
+        default_tag: default
+      ensembl_rb:
+        asset_description: A regulatory annotation file
+        tags:
+          default:
+            asset_path: ensembl_rb
+            asset_digest: 4f9b9daa7b8d2f60ec4814f39630f494
+            seek_keys:
+              ensembl_rb: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.gff.gz
+              dir: .
+            asset_parents: []
+            archive_digest: 72dc7b8928dcf64239b708af1e4f63a9
+            archive_size: 9.8MB
+            asset_size: 9.8MB
+            asset_children: []
+            legacy_archive_digest: 833fe618d7a1c43b8be71c0d9abd626c
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 7e61ef88334e40010e7a65e0b31d6084
+            seek_keys:
+              esa: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.sft
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 77a2a8e45ff58e98fc1bb3f26a512e45
+            seek_keys:
+              bwa_index: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.fa
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+            archive_digest: 8d09ffd6cbd33274c4e22b633156f0de
+            archive_size: 2.8GB
+            asset_size: 4.5GB
+            asset_children: []
+            legacy_archive_digest: c9d2adc60dfc65feadf20f8be8061c99
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 5263d8e0dde91c66f3044e18f4f4f31c
+            seek_keys:
+              bowtie2_index: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+            archive_digest: 5f5247d3d3cb64fe8da4966282306809
+            archive_size: 3.1GB
+            asset_size: 3.5GB
+            asset_children: []
+            legacy_archive_digest: bff5f264c0d004268cb1be806e1a9d29
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 7ee392f36e92676d4572b6d95c7774fe
+            seek_keys:
+              hisat2_index: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+            archive_digest: 344c93be95e513f56290a787188ef94b
+            archive_size: 3.5GB
+            asset_size: 3.8GB
+            asset_children: []
+            legacy_archive_digest: 72ca8568218135fb7be26a4ba7d73636
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: 295b143e0933be5b9ab09f00f92496a4
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+            archive_digest: 098d67fa889f82f0ed3ac7c61229a829
+            archive_size: 22.0GB
+            asset_size: 24.4GB
+            asset_children: []
+            legacy_archive_digest: cee050c859db04dde9310c8f3a4e8d9f
+        default_tag: default
+      fasta_txome:
+        asset_description: cDNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta_txome
+            asset_digest: 8192beb5916da1fdc5640b529fc7bb97
+            seek_keys:
+              fasta_txome: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.fa
+              fai: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.fa.fai
+              chrom_sizes: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: 12c7aa9f955ce32c6a7afc258ea37631
+            archive_size: 51.6MB
+            asset_size: 247.6MB
+            asset_children: []
+            legacy_archive_digest: 6b54bd0c6f8a7d34e585285435a35491
+        default_tag: default
+      cellranger_reference:
+        asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
+        tags:
+          default:
+            asset_path: cellranger_reference
+            asset_digest: 584d963aa2d6b17f5501915a292c9aca
+            seek_keys:
+              cellranger_reference: ref
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/gencode_gtf:default
+            archive_digest: 9984184e09f8a5a3ff6d483eb9dbf426
+            archive_size: 9.6GB
+            asset_size: 15.5GB
+            asset_children: []
+            legacy_archive_digest: 9a0aff6a9bb443b1514010020a1a613c
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 09ae85dcba522cfac08a392dc4c45fd1
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+            archive_digest: e2c7c29354d7ef44b7112744d371c80a
+            archive_size: 6.8GB
+            asset_size: 12.2GB
+            asset_children: []
+            legacy_archive_digest: b443536fe80f217bc0ac0f52253d24fd
+        default_tag: default
+    aliases: 
+     - mm10
+    genome_description: No description
+  79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 9be5749c2a0a50d5f1a4979da5d9de1a
+            seek_keys:
+              fasta: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.fa
+              fai: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.fa.fai
+              chrom_sizes: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/suffixerator_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/bwa_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/bowtie2_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/hisat2_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/star_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/bismark_bt2_index:default
+            archive_digest: 5ea8822221b08f887033d7ba032f4bf0
+            archive_size: 847.3MB
+            asset_size: 2.7GB
+            legacy_archive_digest: af49090ebb18239aa915f4591de62914
+        default_tag: default
+      refgene_anno:
+        asset_description: gene, TSS, exon, intron, and premature mRNA annotation files
+        tags:
+          default:
+            asset_path: refgene_anno
+            asset_digest: 5528f7841879ac0b108194f046a3687d
+            seek_keys:
+              refgene_anno: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_refGene.txt.gz
+              refgene_tss: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_TSS.bed
+              refgene_exon: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_exons.bed
+              refgene_intron: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_introns.bed
+              refgene_pre_mRNA: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_pre-mRNA.bed
+              dir: .
+            asset_parents: []
+            archive_digest: 6cd31a96a62670b47bb5fe64d6c3f049
+            archive_size: 5.4MB
+            asset_size: 13.1MB
+            asset_children: []
+            legacy_archive_digest: 8a38ee0c0dc27263877e1a24901d4d98
+        default_tag: default
+      ensembl_gtf:
+        asset_description: Ensembl GTF, TSS, and gene body annotation
+        tags:
+          default:
+            asset_path: ensembl_gtf
+            asset_digest: 813146b78037a00e15f4f119ddf0d6d2
+            seek_keys:
+              ensembl_gtf: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.gtf.gz
+              ensembl_tss: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_ensembl_TSS.bed
+              ensembl_gene_body: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_ensembl_gene_body.bed
+              dir: .
+            asset_parents: []
+            archive_digest: 9f0fa74b712b2c5b29fec4f6d348fd9a
+            archive_size: 11.7MB
+            asset_size: 14.9MB
+            asset_children: []
+            legacy_archive_digest: 4b57e30ec4a7331679ca7870b5603602
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: c8c9dcb4880294f071c9a9e1421348c0
+            seek_keys:
+              esa: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.sft
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: c85365f5de6a443585455917ce489908
+            seek_keys:
+              bwa_index: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.fa
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            archive_digest: d8ef7aefb1ec1abeedb7a4864e39746d
+            archive_size: 3.0GB
+            asset_size: 4.7GB
+            asset_children: []
+            legacy_archive_digest: c07c12a5c16354aae33c6487e2e73496
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: cf7ecd73c42f5d93d737a44a1c21c9bf
+            seek_keys:
+              bowtie2_index: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            archive_digest: deb54d4cf97ec5d9f71bc46588dc4532
+            archive_size: 3.3GB
+            asset_size: 3.6GB
+            asset_children: []
+            legacy_archive_digest: bc1bcd46e25e74fe09c19e1da7b7f785
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 28d5c1b639ed6ad1e52038a0b8444968
+            seek_keys:
+              hisat2_index: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            archive_digest: fd63714955c7ce6aab1f130ec23d8162
+            archive_size: 3.7GB
+            asset_size: 3.9GB
+            asset_children: []
+            legacy_archive_digest: b1f4cc16fe12966d3d2af70616de7407
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: f647aa6ff4dcb7be5f4c195022bd0bf8
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+        default_tag: default
+      fasta_txome:
+        asset_description: cDNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta_txome
+            asset_digest: b776fbe954753566849d413c5e7d3fed
+            seek_keys:
+              fasta_txome: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.fa
+              fai: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.fa.fai
+              chrom_sizes: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.chrom.sizes
+              dir: .
+            asset_parents: []
+            archive_digest: b8a457809d21ed8729078f1cfa176a2a
+            archive_size: 20.2MB
+            asset_size: 75.4MB
+            asset_children: []
+            legacy_archive_digest: 9a0a9c4c8d13659b2d670df19e70833e
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: d9898b4ae58c74b715f572f4a613a1e7
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            archive_digest: 887eec5583b0cc3bb548e536ee80229f
+            archive_size: 7.0GB
+            asset_size: 12.6GB
+            asset_children: []
+            legacy_archive_digest: 9fb1fb22ad52e70499c6673ce5207660
+        default_tag: default
+    aliases: 
+     - rn6
+    genome_description: No description
+  6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 51a58ef25e4f1d7e76f226fd5655754f
+            seek_keys:
+              fasta: 6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905.fa
+              fai: 6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905.fa.fai
+              chrom_sizes: 6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905/bowtie2_index:default
+            archive_digest: d688a7ca7e6686540670d8056c899d59
+            archive_size: 12.7KB
+            asset_size: 46.7KB
+            legacy_archive_digest: ecd10fb9046887923618cae71f0b141b
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 40a7b72a358850f722b6734a836b0fa8
+            seek_keys:
+              bowtie2_index: 6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905
+              dir: .
+            asset_parents: 
+             - 6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905/fasta:default
+            archive_digest: 2ef91286bcfccb5d80c4760e40921058
+            archive_size: 229.7KB
+            asset_size: 8.1MB
+            asset_children: []
+            legacy_archive_digest: 582aa65abfc8d4617600f6fe13c5dc9e
+        default_tag: default
+    aliases: 
+     - t7
+    genome_description: No description
+  8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 8620c745dbe7bfcdab89aacc155077db
+            seek_keys:
+              fasta: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158.fa
+              fai: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158.fa.fai
+              chrom_sizes: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158/bowtie2_index:default
+            archive_digest: 9c861ccd06f5a72e855357e77034100e
+            archive_size: 43.5MB
+            asset_size: 139.0MB
+            legacy_archive_digest: 5924ec7c8e835cc5e722bbbc3dfdfa05
+        default_tag: default
+      gencode_gtf:
+        asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
+        tags:
+          default:
+            asset_path: gencode_gtf
+            asset_digest: c56c70d6afc95b3c0079b5b2c5d3ffc2
+            seek_keys:
+              gencode_gtf: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158.gtf.gz
+              dir: .
+            asset_parents: []
+            archive_digest: 401036e6281323fa9181366e70516134
+            archive_size: 3.6MB
+            asset_size: 3.8MB
+            asset_children: []
+            legacy_archive_digest: bd483754cf88a961838a003d9ff3ba26
+        default_tag: default
+      refgene_anno:
+        asset_description: gene, TSS, exon, intron, and premature mRNA annotation files
+        tags:
+          default:
+            asset_path: refgene_anno
+            asset_digest: ce9f8496894eace73fe972025fa338e0
+            seek_keys:
+              refgene_anno: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_refGene.txt.gz
+              refgene_tss: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_TSS.bed
+              refgene_exon: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_exons.bed
+              refgene_intron: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_introns.bed
+              refgene_pre_mRNA: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_pre-mRNA.bed
+              dir: .
+            asset_parents: []
+            archive_digest: ba4279c323f6241e7abead954b631ac5
+            archive_size: 3.3MB
+            asset_size: 6.7MB
+            asset_children: []
+            legacy_archive_digest: 34c22c7c81aa2586f2a49ffdde6162f0
+        default_tag: default
+      ensembl_gtf:
+        asset_description: Ensembl GTF, TSS, and gene body annotation
+        tags:
+          default:
+            asset_path: ensembl_gtf
+            asset_digest: 39649956004eb926fde3c23d9db73e7f
+            seek_keys:
+              ensembl_gtf: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158.gtf.gz
+              ensembl_tss: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_ensembl_TSS.bed
+              ensembl_gene_body: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158_ensembl_gene_body.bed
+              dir: .
+            asset_parents: []
+            archive_digest: c8d3e0213d7b27e2fcc2295b8902954e
+            archive_size: 5.8MB
+            asset_size: 7.4MB
+            asset_children: []
+            legacy_archive_digest: 5986dae713421d962b0001333adc71da
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 3e3c651f1aca155b3498cade39a3694a
+            seek_keys:
+              bowtie2_index: 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158
+              dir: .
+            asset_parents: 
+             - 8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158/fasta:default
+            archive_digest: 9236846b502649025a5221f2789768c5
+            archive_size: 178.8MB
+            asset_size: 201.0MB
+            asset_children: []
+            legacy_archive_digest: 4ece3932dcabe173fbb719434dd6b04f
+        default_tag: default
+    aliases: 
+     - dm6
+    genome_description: No description
+  a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 3701eaccf6e8b6637a8b8384abfdc052
+            seek_keys:
+              fasta: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79.fa
+              fai: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79.fa.fai
+              chrom_sizes: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/suffixerator_index:default
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/bwa_index:default
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/bowtie2_index:default
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/star_index:default
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/hisat2_index:default
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/bismark_bt2_index:default
+            archive_digest: 1d7351aa91571b724245f334bc79908a
+            archive_size: 835.0MB
+            asset_size: 2.9GB
+            legacy_archive_digest: 1c7680fc6a0166d07bd06df3263f9834
+        default_tag: default
+      suffixerator_index:
+        asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
+        tags:
+          default:
+            asset_path: suffixerator_index
+            asset_digest: 7ac390682ac47999a01cac5956de79e1
+            seek_keys:
+              esa: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79.sft
+              dir: .
+            asset_parents: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 65ce02a1ae39e2dc45d954b864ba29fd
+            seek_keys:
+              bwa_index: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79.fa
+              dir: .
+            asset_parents: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+            archive_digest: 4573492db4e3b701e32c377a112cc699
+            archive_size: 3.2GB
+            asset_size: 5.1GB
+            asset_children: []
+            legacy_archive_digest: 2a6749f39130d1874c56ccd44c075b3d
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: de11c3669656e8a117143f76afff2a25
+            seek_keys:
+              bowtie2_index: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79
+              dir: .
+            asset_parents: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+            archive_digest: dd593d6b92f996a9f150275344a6b5a5
+            archive_size: 3.5GB
+            asset_size: 3.9GB
+            asset_children: []
+            legacy_archive_digest: 60601668b54a6d4be1686c1b1114cfbd
+        default_tag: default
+      star_index:
+        asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
+        tags:
+          default:
+            asset_path: star_index
+            asset_digest: c7ff741217f4175af81bd133d6251247
+            seek_keys:
+              star_index: .
+              dir: .
+            asset_parents: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+        default_tag: default
+      hisat2_index:
+        asset_description: Genome index for HISAT2, produced with hisat2-build
+        tags:
+          default:
+            asset_path: hisat2_index
+            asset_digest: 34f58ad39e10af1586afc4618c1e97c2
+            seek_keys:
+              hisat2_index: a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79
+              dir: .
+            asset_parents: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+            archive_digest: 8d5e7f869c9a1758f5808245c9bb2663
+            archive_size: 3.9GB
+            asset_size: 4.2GB
+            asset_children: []
+            legacy_archive_digest: 8af172306e760f5795c405d8c37f4036
+        default_tag: default
+      bismark_bt2_index:
+        asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
+        tags:
+          default:
+            asset_path: bismark_bt2_index
+            asset_digest: 2a77fe4b161a99ba9865da34880e367d
+            seek_keys:
+              bismark_bt2_index: .
+              dir: .
+            asset_parents: 
+             - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+            archive_digest: 7885fb9f40d486dee9788b4ce0115da6
+            archive_size: 7.5GB
+            asset_size: 13.6GB
+            asset_children: []
+            legacy_archive_digest: c16330b15df3a3397016f92bc28ae0e0
+        default_tag: default
+    aliases: 
+     - hg38_noalt_decoy
+    genome_description: No description
+  bfdbdd006617e34e64b298f48785022d9376acad57260aaf:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: cbbc1680a4cea8e43f14bbdc39d37162
+            seek_keys:
+              fasta: bfdbdd006617e34e64b298f48785022d9376acad57260aaf.fa
+              fai: bfdbdd006617e34e64b298f48785022d9376acad57260aaf.fa.fai
+              chrom_sizes: bfdbdd006617e34e64b298f48785022d9376acad57260aaf.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - bfdbdd006617e34e64b298f48785022d9376acad57260aaf/bowtie2_index:default
+             - bfdbdd006617e34e64b298f48785022d9376acad57260aaf/bwa_index:default
+            archive_digest: f615708f458dc449607b81a0148c5da9
+            archive_size: 828.8MB
+            asset_size: 2.6GB
+            legacy_archive_digest: 4ce2ba3d430c9b92678679ede747b0e3
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: e9cb12a68f5fc5f436392540e072b33e
+            seek_keys:
+              bowtie2_index: bfdbdd006617e34e64b298f48785022d9376acad57260aaf
+              dir: .
+            asset_parents: 
+             - bfdbdd006617e34e64b298f48785022d9376acad57260aaf/fasta:default
+            archive_digest: 8c522614a94f27216f1268e2d675258d
+            archive_size: 3.1GB
+            asset_size: 3.5GB
+            asset_children: []
+            legacy_archive_digest: dd28780c747d169a1be23f654192f89f
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 88f803aa6339f8bdbf8999d3b07d4599
+            seek_keys:
+              bwa_index: bfdbdd006617e34e64b298f48785022d9376acad57260aaf.fa
+              dir: .
+            asset_parents: 
+             - bfdbdd006617e34e64b298f48785022d9376acad57260aaf/fasta:default
+            archive_digest: fd63b92a04ac2594046f776623ef9f3c
+            archive_size: 2.8GB
+            asset_size: 4.4GB
+            asset_children: []
+            legacy_archive_digest: 913794c3f1c72dc47679d4bf51a1d093
+        default_tag: default
+    aliases: 
+     - mm10_primary
+    genome_description: No description
+  047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: ce4085959123ca656e7059f8b14ffc86
+            seek_keys:
+              fasta: 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae.fa
+              fai: 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae.fa.fai
+              chrom_sizes: 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae/bwa_index:default
+             - 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae/bowtie2_index:default
+            archive_digest: 5d3515969623c20f95bc5adbd6d4b1d8
+            archive_size: 904.6MB
+            asset_size: 2.9GB
+            legacy_archive_digest: b56cbd5dfddb414e8ce58a12426c81b9
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 41e1499d24e3c118811716186b08a1bc
+            seek_keys:
+              bwa_index: 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae.fa
+              dir: .
+            asset_parents: 
+             - 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae/fasta:default
+            archive_digest: 0fd641b3b7a5a6fb6d55fdbf60ae09e7
+            archive_size: 3.2GB
+            asset_size: 5.0GB
+            asset_children: []
+            legacy_archive_digest: dbd153a3609758b9305dc50505cdd35f
+        default_tag: default
+      bowtie2_index:
+        asset_description: Genome index for bowtie, produced with bowtie-build
+        tags:
+          default:
+            asset_path: bowtie2_index
+            asset_digest: 01453681757d6933fa84bf77263bf553
+            seek_keys:
+              bowtie2_index: 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae
+              dir: .
+            asset_parents: 
+             - 047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae/fasta:default
+            archive_digest: dd3fea1b082a1ac9eb01154f2b8e67c5
+            archive_size: 3.5GB
+            asset_size: 3.9GB
+            asset_children: []
+            legacy_archive_digest: 73cf529b68885f72e6f931eb9dae9761
+        default_tag: default
+    aliases: 
+     - hg38_primary
+    genome_description: No description
+  644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33:
+    assets:
+      fasta:
+        asset_description: DNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
+        tags:
+          default:
+            asset_path: fasta
+            asset_digest: 463540bce12ce47ae485f4430a5dbd29
+            seek_keys:
+              fasta: 644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33.fa
+              fai: 644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33.fa.fai
+              chrom_sizes: 644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33.chrom.sizes
+              dir: .
+            asset_parents: []
+            asset_children: 
+             - 644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33/bwa_index:default
+            archive_digest: 3e859fab955cacabf831ba797d6bd2b9
+            archive_size: 1.7GB
+            asset_size: 5.5GB
+            legacy_archive_digest: f4f18272e823fe844bf545761569a620
+        default_tag: default
+      bwa_index:
+        asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
+        tags:
+          default:
+            asset_path: bwa_index
+            asset_digest: 861b408e96cf1ca56c748dfc13a55396
+            seek_keys:
+              bwa_index: 644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33.fa
+              dir: .
+            asset_parents: 
+             - 644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33/fasta:default
+            archive_digest: aa91278285444f6bf50023a79d5ab650
+            archive_size: 6.1GB
+            asset_size: 9.5GB
+            asset_children: []
+            legacy_archive_digest: 75793a988c68b5d7589b9296d15f935d
+        default_tag: default
+    aliases: 
+     - hg38_mm10
+    genome_description: No description
+genome_archive_folder: /project/shefflab//deploy/rg.databio.org_full/genomes/archive
 genome_archive_config: refgenie_config_archive.yaml
