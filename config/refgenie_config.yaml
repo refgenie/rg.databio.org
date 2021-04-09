@@ -109,6 +109,7 @@ genomes:
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/hisat2_index:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/cellranger_reference:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bismark_bt2_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
         default_tag: default
       gencode_gtf:
         asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
@@ -162,6 +163,8 @@ genomes:
               ensembl_gene_body: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_ensembl_gene_body.bed
               dir: .
             asset_parents: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
         default_tag: default
       ensembl_rb:
         asset_description: A regulatory annotation file
@@ -210,18 +213,6 @@ genomes:
             asset_parents: 
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
         default_tag: default
-      dbnsfp:
-        asset_description: A database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome (Gencode release 29/Ensembl 94)
-        tags:
-          default:
-            asset_path: dbnsfp
-            asset_digest: d41d8cd98f00b204e9800998ecf8427e
-            seek_keys:
-              dbnsfp: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz
-              tabix: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz.tbi
-              dir: .
-            asset_parents: []
-        default_tag: default
       star_index:
         asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
         tags:
@@ -246,6 +237,8 @@ genomes:
               chrom_sizes: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
         default_tag: default
       hisat2_index:
         asset_description: Genome index for HISAT2, produced with hisat2-build
@@ -283,6 +276,32 @@ genomes:
               dir: .
             asset_parents: 
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+        default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            asset_digest: 7b271a9c8383046370ae882600b3c848
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/ensembl_gtf:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta_txome:default
+        default_tag: default
+      dbnsfp:
+        asset_description: A database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome (Gencode release 29/Ensembl 94)
+        tags:
+          default:
+            asset_path: dbnsfp
+            asset_digest: f9a65727a9731ad4adfd8504c2b99587
+            seek_keys:
+              dbnsfp: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz
+              tabix: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz.tbi
+              dir: .
+            asset_parents: []
         default_tag: default
     aliases: 
      - hg38
@@ -495,6 +514,20 @@ genomes:
               chrom_sizes: 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87/kallisto_index:default
+        default_tag: default
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        tags:
+          default:
+            asset_path: kallisto_index
+            asset_digest: 20a2b3c7397738cfa7049c8bb5141384
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            asset_parents: 
+             - 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87/fasta:default
         default_tag: default
     aliases: 
      - hg18_cdna
@@ -608,6 +641,33 @@ genomes:
               chrom_sizes: 9a02d64909100f146272f8e16563178e9e93c218b1126ff9.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/salmon_index:default
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/kallisto_index:default
+        default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        tags:
+          default:
+            asset_path: salmon_index
+            asset_digest: 9ede2cc5de22cb075e3df6d80d404f11
+            seek_keys:
+              salmon_index: .
+              dir: .
+            asset_parents: 
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/fasta:default
+        default_tag: default
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        tags:
+          default:
+            asset_path: kallisto_index
+            asset_digest: c00dbc280b40b718262f4cb966dabd4f
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            asset_parents: 
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/fasta:default
         default_tag: default
     aliases: 
      - hg38_cdna
@@ -627,6 +687,7 @@ genomes:
             asset_parents: []
             asset_children: 
              - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/salmon_index:default
+             - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/kallisto_index:default
         default_tag: default
       salmon_index:
         asset_description: Transcriptome index for salmon, produced with salmon index
@@ -636,6 +697,18 @@ genomes:
             asset_digest: 9edfd9d0e9fffceb145e2e2eab8d886e
             seek_keys:
               salmon_index: .
+              dir: .
+            asset_parents: 
+             - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/fasta:default
+        default_tag: default
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        tags:
+          default:
+            asset_path: kallisto_index
+            asset_digest: 8beb628953400ab94363249640fe157e
+            seek_keys:
+              kallisto_index: .
               dir: .
             asset_parents: 
              - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/fasta:default
@@ -658,6 +731,7 @@ genomes:
             asset_parents: []
             asset_children: 
              - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/salmon_index:default
+             - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/kallisto_index:default
         default_tag: default
       salmon_index:
         asset_description: Transcriptome index for salmon, produced with salmon index
@@ -667,6 +741,18 @@ genomes:
             asset_digest: 5378ebe8af9716a4bd8515db1a0a634d
             seek_keys:
               salmon_index: .
+              dir: .
+            asset_parents: 
+             - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/fasta:default
+        default_tag: default
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        tags:
+          default:
+            asset_path: kallisto_index
+            asset_digest: a8653fdc5af32ebbb37eaf04385b4ca3
+            seek_keys:
+              kallisto_index: .
               dir: .
             asset_parents: 
              - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/fasta:default
@@ -687,6 +773,33 @@ genomes:
               chrom_sizes: fc77e33fa26398662380748a62ab6279dab2a637256acd89.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/salmon_index:default
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/kallisto_index:default
+        default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        tags:
+          default:
+            asset_path: salmon_index
+            asset_digest: 271fdab58efc5b58a0310594c08f7f42
+            seek_keys:
+              salmon_index: .
+              dir: .
+            asset_parents: 
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/fasta:default
+        default_tag: default
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        tags:
+          default:
+            asset_path: kallisto_index
+            asset_digest: 02e8e0e2fd7e6675fec9eaf4781aa532
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            asset_parents: 
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/fasta:default
         default_tag: default
     aliases: 
      - hg19_cdna
@@ -1425,6 +1538,7 @@ genomes:
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/star_index:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/cellranger_reference:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/bismark_bt2_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
         default_tag: default
       gencode_gtf:
         asset_description: GTF annotation asset which provides access to all annotated transcripts which make up an Ensembl gene set.
@@ -1466,6 +1580,8 @@ genomes:
               ensembl_gene_body: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_ensembl_gene_body.bed
               dir: .
             asset_parents: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
         default_tag: default
       ensembl_rb:
         asset_description: A regulatory annotation file
@@ -1550,6 +1666,8 @@ genomes:
               chrom_sizes: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
         default_tag: default
       cellranger_reference:
         asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
@@ -1576,6 +1694,20 @@ genomes:
             asset_parents: 
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
         default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            asset_digest: eb150cae678e9ed871f54d7b023d0948
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/ensembl_gtf:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta_txome:default
+        default_tag: default
     aliases: 
      - mm10
   79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9:
@@ -1599,6 +1731,7 @@ genomes:
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/hisat2_index:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/star_index:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/bismark_bt2_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
         default_tag: default
       refgene_anno:
         asset_description: gene, TSS, exon, intron, and premature mRNA annotation files
@@ -1627,6 +1760,8 @@ genomes:
               ensembl_gene_body: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_ensembl_gene_body.bed
               dir: .
             asset_parents: []
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
         default_tag: default
       suffixerator_index:
         asset_description: Enhanced suffix array index for genomes using gt (GenomeTools) suffixerator program
@@ -1700,6 +1835,8 @@ genomes:
               chrom_sizes: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9.chrom.sizes
               dir: .
             asset_parents: []
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
         default_tag: default
       bismark_bt2_index:
         asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
@@ -1711,6 +1848,20 @@ genomes:
               bismark_bt2_index: .
               dir: .
             asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+        default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            asset_digest: b7a1aa4d19028b3525adafb4295826f0
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/ensembl_gtf:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta_txome:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
         default_tag: default
     aliases: 

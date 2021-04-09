@@ -63,6 +63,11 @@ genomes:
               dir: .
             asset_parents: 
              - 94e0d21feb576e6af61cd2a798ad30682ef2428bb7eabbb4/fasta:default
+            archive_digest: b10214c873667dd2979ed97bd33f4b88
+            archive_size: 33.3KB
+            asset_size: 62.8KB
+            asset_children: []
+            legacy_archive_digest: 73dace92a77e985b06ace8776601bae7
         default_tag: default
       star_index:
         asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
@@ -117,7 +122,7 @@ genomes:
         default_tag: default
     aliases: 
      - rCRSd
-    genome_description: test description rCRSd
+    genome_description: The revised cambridge reference sequence. This is the human mitochondrial reference genome
   2230c535660fb4774114bfa966a62f823fdb6d21acf138d4:
     assets:
       fasta:
@@ -140,6 +145,7 @@ genomes:
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/hisat2_index:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/cellranger_reference:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/bismark_bt2_index:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
             archive_digest: 4e94404ceab2b97f86afee1709d4f47e
             archive_size: 833.4MB
             asset_size: 2.9GB
@@ -214,7 +220,8 @@ genomes:
             archive_digest: 1697939994ce71b225ea1c792616fa24
             archive_size: 46.6MB
             asset_size: 56.4MB
-            asset_children: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
             legacy_archive_digest: 0d868266b9dd658edb2f875ad995b13e
         default_tag: default
       ensembl_rb:
@@ -244,6 +251,11 @@ genomes:
               dir: .
             asset_parents: 
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+            archive_digest: ba6a965e6f6bb943b523bd6a2d94b201
+            archive_size: 15.9GB
+            asset_size: 27.3GB
+            asset_children: []
+            legacy_archive_digest: 0312839a35ef9924c277bda874426125
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -284,17 +296,17 @@ genomes:
         tags:
           default:
             asset_path: dbnsfp
-            asset_digest: d41d8cd98f00b204e9800998ecf8427e
+            asset_digest: f9a65727a9731ad4adfd8504c2b99587
             seek_keys:
               dbnsfp: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz
               tabix: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz.tbi
               dir: .
             asset_parents: []
-            archive_digest: 5a870bb99810a9d034decffca9cd9580
-            archive_size: 124B
-            asset_size: 25.8KB
+            archive_digest: 9c185929713231de292157cada2376b4
+            archive_size: 22.8GB
+            asset_size: 22.9GB
             asset_children: []
-            legacy_archive_digest: 345695b24b2a80edc6180117a15fb0f6
+            legacy_archive_digest: 4a79fc5276fd44d6cf2fd2a4e7980122
         default_tag: default
       star_index:
         asset_description: Genome index for STAR RNA-seq aligner, produced with STAR --runMode genomeGenerate
@@ -328,7 +340,8 @@ genomes:
             archive_digest: 92f4515473541290855175a35beb401c
             archive_size: 69.1MB
             asset_size: 363.9MB
-            asset_children: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
             legacy_archive_digest: 1fd9217232c8934217a4ccb73f05e55e
         default_tag: default
       hisat2_index:
@@ -360,6 +373,11 @@ genomes:
             asset_parents: 
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/gencode_gtf:default
+            archive_digest: 5b263624451abfa416b8661703df65f6
+            archive_size: 10.7GB
+            asset_size: 17.7GB
+            asset_children: []
+            legacy_archive_digest: 7a5a03758c653c107f293ca900046d1e
         default_tag: default
       bismark_bt2_index:
         asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
@@ -378,9 +396,28 @@ genomes:
             asset_children: []
             legacy_archive_digest: e863367be9c1200f1e12f29851d2bcd8
         default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            archive_digest: d16df614c5e8e3911182c7bae1a4e483
+            archive_size: 943.4MB
+            asset_size: 2.5GB
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/ensembl_gtf:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta_txome:default
+            asset_children: []
+            asset_digest: 7b271a9c8383046370ae882600b3c848
+            legacy_archive_digest: a485f17c13d4ee6a25452627f2daabff
     aliases: 
      - hg38
-    genome_description: test description hg38
+    genome_description: The GCA_000001405.15 GRCh38_no_alt_analysis_set from NCBI
   7319f9237651755047bc40d7f7a9770d42a537e840f4e105:
     assets:
       fasta:
@@ -511,7 +548,7 @@ genomes:
         default_tag: default
     aliases: 
      - human_repeats
-    genome_description: test description human repeats
+    genome_description: Manually curated collection of human repeat sequences from GenBank
   43f14ba8beed34d52edb244e26f193df6edbb467bd55d37a:
     assets:
       fasta:
@@ -642,7 +679,7 @@ genomes:
         default_tag: default
     aliases: 
      - mouse_chrM2x
-    genome_description: test description mouse chrM2x
+    genome_description: "The mouse mitochondrial genome, doubled"
   4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87:
     assets:
       fasta:
@@ -660,12 +697,30 @@ genomes:
             archive_digest: 5e28cb6a4abad04026844b9ba7bb9d80
             archive_size: 26.4MB
             asset_size: 129.8MB
-            asset_children: []
+            asset_children: 
+             - 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87/kallisto_index:default
             legacy_archive_digest: 08d71ecd74c9f63b52439a0caf407522
         default_tag: default
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        default_tag: default
+        tags:
+          default:
+            asset_path: kallisto_index
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            archive_digest: aa57c565f4c5305ba3b2a7ec3c92820b
+            archive_size: 973.2MB
+            asset_size: 1.2GB
+            asset_parents: 
+             - 4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87/fasta:default
+            asset_children: []
+            asset_digest: 20a2b3c7397738cfa7049c8bb5141384
+            legacy_archive_digest: c404a44c95dd52b0eeb29ee577e91cca
     aliases: 
      - hg18_cdna
-    genome_description: No description
+    genome_description: The NCBI36 cDNA reference sequence from Ensembl
   45818b389d17308bb520512bb0d4f76764430c3eaaacc4a9:
     assets:
       fasta:
@@ -796,7 +851,7 @@ genomes:
         default_tag: default
     aliases: 
      - hs38d1
-    genome_description: No description
+    genome_description: Decoy version 1 for GRCh38 from NCBI
   9a02d64909100f146272f8e16563178e9e93c218b1126ff9:
     assets:
       fasta:
@@ -814,12 +869,48 @@ genomes:
             archive_digest: c8440c42470a7d16af3bd571577e0449
             archive_size: 69.1MB
             asset_size: 363.9MB
-            asset_children: []
+            asset_children: 
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/salmon_index:default
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/kallisto_index:default
             legacy_archive_digest: ee2ca0f883b4a0d31ac5b5d3b5fecdcc
         default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_index
+            seek_keys:
+              salmon_index: .
+              dir: .
+            archive_digest: 09da3e20055973e9dd9bc41dcaca482f
+            archive_size: 525.8MB
+            asset_size: 617.9MB
+            asset_parents: 
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/fasta:default
+            asset_children: []
+            asset_digest: 9ede2cc5de22cb075e3df6d80d404f11
+            legacy_archive_digest: dcad6f52724b925ba883af76be967fc3
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        default_tag: default
+        tags:
+          default:
+            asset_path: kallisto_index
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            archive_digest: 48862064a85eba2af3226d011ec44d87
+            archive_size: 1.7GB
+            asset_size: 2.3GB
+            asset_parents: 
+             - 9a02d64909100f146272f8e16563178e9e93c218b1126ff9/fasta:default
+            asset_children: []
+            asset_digest: c00dbc280b40b718262f4cb966dabd4f
+            legacy_archive_digest: 0ff87ac8d0031e5e3a0b91a1dcd684e6
     aliases: 
      - hg38_cdna
-    genome_description: No description
+    genome_description: The GRCh38 cDNA reference sequence from Ensembl
   d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89:
     assets:
       fasta:
@@ -837,12 +928,48 @@ genomes:
             archive_digest: 4492d1c0f0fcbaba252195173426f6b4
             archive_size: 20.2MB
             asset_size: 75.4MB
-            asset_children: []
+            asset_children: 
+             - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/salmon_index:default
+             - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/kallisto_index:default
             legacy_archive_digest: 28c75cd20522f41c41dcf9fc6e0d4a07
         default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_index
+            seek_keys:
+              salmon_index: .
+              dir: .
+            archive_digest: 5d3266238500d44f8a320425a30fe09d
+            archive_size: 207.7MB
+            asset_size: 227.3MB
+            asset_parents: 
+             - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/fasta:default
+            asset_children: []
+            asset_digest: 9edfd9d0e9fffceb145e2e2eab8d886e
+            legacy_archive_digest: 21063870518177f83bcf8cf8d8d7c12d
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        default_tag: default
+        tags:
+          default:
+            asset_path: kallisto_index
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            archive_digest: e22f6c940b4d35e789d914d70ade1880
+            archive_size: 785.8MB
+            asset_size: 1016.0MB
+            asset_parents: 
+             - d982f0b1888504cccc131d5fa2c11eb3522b9a8e95e0ea89/fasta:default
+            asset_children: []
+            asset_digest: 8beb628953400ab94363249640fe157e
+            legacy_archive_digest: 71ddbc0c8736761425125e272c930613
     aliases: 
      - rn6_cdna
-    genome_description: No description
+    genome_description: The Rnor_6.0 cDNA reference sequence from Ensembl
   fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca:
     assets:
       fasta:
@@ -860,12 +987,48 @@ genomes:
             archive_digest: a0427e0f24a8903bee8ae294cfe61a03
             archive_size: 51.6MB
             asset_size: 247.6MB
-            asset_children: []
+            asset_children: 
+             - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/salmon_index:default
+             - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/kallisto_index:default
             legacy_archive_digest: e10482eb2e3623427e9d4847a79d023a
         default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_index
+            seek_keys:
+              salmon_index: .
+              dir: .
+            archive_digest: 7a924bb5e1fb10a9a1bc191d65673d15
+            archive_size: 452.6MB
+            asset_size: 515.0MB
+            asset_parents: 
+             - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/fasta:default
+            asset_children: []
+            asset_digest: 5378ebe8af9716a4bd8515db1a0a634d
+            legacy_archive_digest: 17e5e595b3e3ef3f8cb64612998fc88a
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        default_tag: default
+        tags:
+          default:
+            asset_path: kallisto_index
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            archive_digest: 2121bf712b6952aed4e80415196d4f58
+            archive_size: 1.6GB
+            asset_size: 2.1GB
+            asset_parents: 
+             - fa159612d40b1bedea9a279eb24999b3d27145f9dd70dcca/fasta:default
+            asset_children: []
+            asset_digest: a8653fdc5af32ebbb37eaf04385b4ca3
+            legacy_archive_digest: 484f0503c9ddf526d459abbaed22e0be
     aliases: 
      - mm10_cdna
-    genome_description: No description
+    genome_description: The GRCm38 cDNA reference sequence from Ensembl
   fc77e33fa26398662380748a62ab6279dab2a637256acd89:
     assets:
       fasta:
@@ -883,12 +1046,48 @@ genomes:
             archive_digest: 3e10ce65ba9475d2d327995fccb22c4b
             archive_size: 60.7MB
             asset_size: 315.1MB
-            asset_children: []
+            asset_children: 
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/salmon_index:default
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/kallisto_index:default
             legacy_archive_digest: be31e463cb5a917c9bca3404ebbaef5d
         default_tag: default
+      salmon_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_index
+            seek_keys:
+              salmon_index: .
+              dir: .
+            archive_digest: 809d9caabcfe1ec0569dac62386fd1e7
+            archive_size: 470.4MB
+            asset_size: 550.4MB
+            asset_parents: 
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/fasta:default
+            asset_children: []
+            asset_digest: 271fdab58efc5b58a0310594c08f7f42
+            legacy_archive_digest: 9583f9bf65d34e3bde555d9517fd3ed9
+      kallisto_index:
+        asset_description: Genome index for kallisto, produced with kallisto index
+        default_tag: default
+        tags:
+          default:
+            asset_path: kallisto_index
+            seek_keys:
+              kallisto_index: .
+              dir: .
+            archive_digest: 5fc480b0f87547cce476062ac0e999e5
+            archive_size: 1.6GB
+            asset_size: 2.1GB
+            asset_parents: 
+             - fc77e33fa26398662380748a62ab6279dab2a637256acd89/fasta:default
+            asset_children: []
+            asset_digest: 02e8e0e2fd7e6675fec9eaf4781aa532
+            legacy_archive_digest: b9761670ee8b2177ddc2a1748dc8c020
     aliases: 
      - hg19_cdna
-    genome_description: No description
+    genome_description: The GRCh37 cDNA reference sequence from Ensembl
   fec6bcce9821b57f98ffc5d46ebec4f2f756c2e9db800ab7:
     assets:
       fasta:
@@ -1019,7 +1218,7 @@ genomes:
         default_tag: default
     aliases: 
      - hg38_chr22
-    genome_description: No description
+    genome_description: Includes only chromosome 22 from the hg38 reference. Useful for testing.
   baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c:
     assets:
       fasta:
@@ -1042,6 +1241,7 @@ genomes:
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/star_index:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/cellranger_reference:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/bismark_bt2_index:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/salmon_partial_sa_index:default
             archive_digest: 80cef56fafce40329d9fb7784e12ac24
             archive_size: 905.3MB
             asset_size: 3.0GB
@@ -1116,7 +1316,8 @@ genomes:
             archive_digest: 6cf20964f3f01ee9e7cb025b0aaa559b
             archive_size: 42.5MB
             asset_size: 51.3MB
-            asset_children: []
+            asset_children: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/salmon_partial_sa_index:default
             legacy_archive_digest: 4e8b01c8a258c76db7a3c66d9cea9eab
         default_tag: default
       ensembl_rb:
@@ -1146,6 +1347,11 @@ genomes:
               dir: .
             asset_parents: 
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: 3c2e313faf57c218ea1443b5212e968a
+            archive_size: 15.9GB
+            asset_size: 27.6GB
+            asset_children: []
+            legacy_archive_digest: 265ee23c36d3974fb744567a742a9554
         default_tag: default
       bowtie2_index:
         asset_description: Genome index for bowtie, produced with bowtie-build
@@ -1213,7 +1419,8 @@ genomes:
             archive_digest: 9727d295f5e88426d228257870413006
             archive_size: 60.7MB
             asset_size: 315.1MB
-            asset_children: []
+            asset_children: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/salmon_partial_sa_index:default
             legacy_archive_digest: e53b3d1966ca98db263286f2e7389a44
         default_tag: default
       star_index:
@@ -1227,6 +1434,11 @@ genomes:
               dir: .
             asset_parents: 
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: 4f029dfec175fd3390b2a4ded3238ddd
+            archive_size: 48.0GB
+            asset_size: 26.7GB
+            asset_children: []
+            legacy_archive_digest: 0e41c0886fc51b27ef00a3f87f5cacbd
         default_tag: default
       cellranger_reference:
         asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
@@ -1240,6 +1452,11 @@ genomes:
             asset_parents: 
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/gencode_gtf:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: 4f05306bbdd4d5f3ab9d4ca79c963c04
+            archive_size: 10.7GB
+            asset_size: 18.4GB
+            asset_children: []
+            legacy_archive_digest: ca6a134e8d0303019eb89ece95948b52
         default_tag: default
       bismark_bt2_index:
         asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
@@ -1252,10 +1469,34 @@ genomes:
               dir: .
             asset_parents: 
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+            archive_digest: 6617c619c9ab75ac8dc0af7e71931842
+            archive_size: 15.9GB
+            asset_size: 13.6GB
+            asset_children: []
+            legacy_archive_digest: 83637f201ab458ed30121f68536f285d
         default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            archive_digest: c256c89cfba22973f1e9b96cc59328aa
+            archive_size: 879.5MB
+            asset_size: 2.4GB
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta_txome:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/ensembl_gtf:default
+            asset_children: []
+            asset_digest: 1c9e9bfa5bc243254cafd0e665c6aceb
+            legacy_archive_digest: 211c5928295305b487f920c1b909b706
     aliases: 
      - hg19
-    genome_description: No description
+    genome_description: The GRCh37 reference sequence from UCSC
   9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01:
     assets:
       fasta:
@@ -1328,6 +1569,11 @@ genomes:
               dir: .
             asset_parents: 
              - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+            archive_digest: bd8689f4bcbb3b7ca4375b52d0bb275c
+            archive_size: 15.7GB
+            asset_size: 27.2GB
+            asset_children: []
+            legacy_archive_digest: 1945310992cf64c1929a3265ba9878e4
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -1392,6 +1638,11 @@ genomes:
               dir: .
             asset_parents: 
              - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+            archive_digest: 8a2b2badd589905317d45a6748f5a873
+            archive_size: 47.7GB
+            asset_size: 26.5GB
+            asset_children: []
+            legacy_archive_digest: 79c967998c7e7e746a0206302dafac68
         default_tag: default
       cellranger_reference:
         asset_description: Cell Ranger custom genome reference for read alignment and gene expression quantification
@@ -1405,11 +1656,11 @@ genomes:
             asset_parents: 
              - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
              - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/gencode_gtf:default
-            archive_digest: 559ebc7ebe3886c083a1170935510fcd
+            archive_digest: 850f369e92bdd5fea0bf8bbd9ce43974
             archive_size: 10.4GB
             asset_size: 16.5GB
             asset_children: []
-            legacy_archive_digest: b953fc9083a75af8695b156c4613f3d0
+            legacy_archive_digest: 5426e7bf0e7e444cfce6e532a4975f14
         default_tag: default
       bismark_bt2_index:
         asset_description: Genome index for Bisulfite-Seq applications, produced by bismark_genome_preparation using bowtie2
@@ -1422,10 +1673,15 @@ genomes:
               dir: .
             asset_parents: 
              - 9b7fd88cae1bd01bf53760fb426e2aeb299150cc64af2b01/fasta:default
+            archive_digest: efdc15ce6f0381f1c878bb40ba0d00bd
+            archive_size: 15.8GB
+            asset_size: 13.5GB
+            asset_children: []
+            legacy_archive_digest: 19bf3d1bc997cc83d0b5686a5d2742e5
         default_tag: default
     aliases: 
      - hg18
-    genome_description: No description
+    genome_description: The NCBI36 reference sequence from UCSC. The individual chromosome files were concatenated prior to the asset building
   74a50bdcb018c11d17d94d44679da3cbb3cb420df0ab1e46:
     assets:
       fasta:
@@ -1538,7 +1794,7 @@ genomes:
         default_tag: default
     aliases: 
      - human_alu
-    genome_description: No description
+    genome_description: "Manually curated human ALU repeats from GenBank, obtained from ref_decoy"
   b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8:
     assets:
       fasta:
@@ -1669,7 +1925,7 @@ genomes:
         default_tag: default
     aliases: 
      - human_rDNA
-    genome_description: No description
+    genome_description: Human rDNA sequences curated from GenBank
   3cd9f8c34e28a1e8823632449b6d8a6afe5a1032245e7475:
     assets:
       fasta:
@@ -1800,7 +2056,7 @@ genomes:
         default_tag: default
     aliases: 
      - human_alphasat
-    genome_description: No description
+    genome_description: "Manually curated human alpha-satellite sequences from GenBank, obtained from ref_decoy"
   0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1:
     assets:
       fasta:
@@ -1823,6 +2079,7 @@ genomes:
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/star_index:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/cellranger_reference:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/bismark_bt2_index:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
             archive_digest: bfe552cb778db3777e88972ea645557d
             archive_size: 763.4MB
             asset_size: 2.6GB
@@ -1880,7 +2137,8 @@ genomes:
             archive_digest: 08f20bfebe21504d57a5a1d04f9398a2
             archive_size: 30.5MB
             asset_size: 37.8MB
-            asset_children: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
             legacy_archive_digest: e2be8cdbb9da92e69af4bdc43c46c8fc
         default_tag: default
       ensembl_rb:
@@ -1910,6 +2168,11 @@ genomes:
               dir: .
             asset_parents: 
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+            archive_digest: 36d7ec7535d01c59f76a4b280cc88a79
+            archive_size: 39.3GB
+            asset_size: 25.2GB
+            asset_children: []
+            legacy_archive_digest: b5af97e8e0a21feee6d6ba1ea1b8562f
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -1994,7 +2257,8 @@ genomes:
             archive_digest: 12c7aa9f955ce32c6a7afc258ea37631
             archive_size: 51.6MB
             asset_size: 247.6MB
-            asset_children: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
             legacy_archive_digest: 6b54bd0c6f8a7d34e585285435a35491
         default_tag: default
       cellranger_reference:
@@ -2032,9 +2296,28 @@ genomes:
             asset_children: []
             legacy_archive_digest: b443536fe80f217bc0ac0f52253d24fd
         default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            archive_digest: c604d1fcd0fa1c49dbef3cac40b5194d
+            archive_size: 802.1MB
+            asset_size: 1.9GB
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/ensembl_gtf:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta_txome:default
+            asset_children: []
+            asset_digest: eb150cae678e9ed871f54d7b023d0948
+            legacy_archive_digest: 223b3228f77636e191f5460c1db06f2a
     aliases: 
      - mm10
-    genome_description: No description
+    genome_description: The GCA_000001635.5 seqs_for_alignment_pipelines from NCBI
   79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9:
     assets:
       fasta:
@@ -2056,6 +2339,7 @@ genomes:
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/hisat2_index:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/star_index:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/bismark_bt2_index:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
             archive_digest: 5ea8822221b08f887033d7ba032f4bf0
             archive_size: 847.3MB
             asset_size: 2.7GB
@@ -2096,7 +2380,8 @@ genomes:
             archive_digest: 9f0fa74b712b2c5b29fec4f6d348fd9a
             archive_size: 11.7MB
             asset_size: 14.9MB
-            asset_children: []
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
             legacy_archive_digest: 4b57e30ec4a7331679ca7870b5603602
         default_tag: default
       suffixerator_index:
@@ -2110,6 +2395,11 @@ genomes:
               dir: .
             asset_parents: 
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            archive_digest: 6b9a969a41b602e6e324c0f57666373c
+            archive_size: 15.2GB
+            asset_size: 26.7GB
+            asset_children: []
+            legacy_archive_digest: f33bc8ae3bfce8ae635da817e9c05c08
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -2173,6 +2463,11 @@ genomes:
               dir: .
             asset_parents: 
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            archive_digest: c916d12f8be0711881524c079dc67489
+            archive_size: 45.3GB
+            asset_size: 25.3GB
+            asset_children: []
+            legacy_archive_digest: f0b330b9fa30da285f1e807c4bd6ca7d
         default_tag: default
       fasta_txome:
         asset_description: cDNA sequences in the FASTA format, indexed FASTA (produced with samtools index) and chromosome sizes file
@@ -2189,7 +2484,8 @@ genomes:
             archive_digest: b8a457809d21ed8729078f1cfa176a2a
             archive_size: 20.2MB
             asset_size: 75.4MB
-            asset_children: []
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
             legacy_archive_digest: 9a0a9c4c8d13659b2d670df19e70833e
         default_tag: default
       bismark_bt2_index:
@@ -2209,9 +2505,28 @@ genomes:
             asset_children: []
             legacy_archive_digest: 9fb1fb22ad52e70499c6673ce5207660
         default_tag: default
+      salmon_partial_sa_index:
+        asset_description: Transcriptome index for salmon, produced with salmon index using partial selective alignment method. Preparation includes transcriptome mapping to the genome and extraction of the relevant portion out from the genome and indexing it along with the transcriptome. Recipe source -- https://github.com/COMBINE-lab/SalmonTools/blob/master/scripts/generateDecoyTranscriptome.sh
+        default_tag: default
+        tags:
+          default:
+            asset_path: salmon_partial_sa_index
+            seek_keys:
+              salmon_partial_sa_index: .
+              dir: .
+            archive_digest: 2150140e46850a07ee82479dcb767080
+            archive_size: 408.3MB
+            asset_size: 797.1MB
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/ensembl_gtf:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta_txome:default
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            asset_children: []
+            asset_digest: b7a1aa4d19028b3525adafb4295826f0
+            legacy_archive_digest: f20e45bdb58dc5f1222df6f68fb8352d
     aliases: 
      - rn6
-    genome_description: No description
+    genome_description: The GCA_000001895.4_Rnor_6.0_genomic from NCBI
   6c5f19c9c2850e62cc3f89b04047fa05eee911662bd77905:
     assets:
       fasta:
@@ -2252,7 +2567,7 @@ genomes:
         default_tag: default
     aliases: 
      - t7
-    genome_description: No description
+    genome_description: "Genome of T7 phage, V01146.1 from GenBank"
   8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158:
     assets:
       fasta:
@@ -2347,7 +2662,7 @@ genomes:
         default_tag: default
     aliases: 
      - dm6
-    genome_description: No description
+    genome_description: Drosophila reference genome GCF_000001215.4 from NCBI
   a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79:
     assets:
       fasta:
@@ -2385,6 +2700,11 @@ genomes:
               dir: .
             asset_parents: 
              - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+            archive_digest: f8d42df4375a411feb6194c681ef9cfb
+            archive_size: 15.9GB
+            asset_size: 27.4GB
+            asset_children: []
+            legacy_archive_digest: 984760d42d1616678692fb3f9138bf46
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -2431,6 +2751,11 @@ genomes:
               dir: .
             asset_parents: 
              - a735e331b2a8ae5cd4e7519575c4c09426a276175c57bd79/fasta:default
+            archive_digest: 4897bcfb6e5f4f5b688c20ca2eee8618
+            archive_size: 48.6GB
+            asset_size: 27.6GB
+            asset_children: []
+            legacy_archive_digest: a7b98a89b86217fdf15ea0f3029d19ba
         default_tag: default
       hisat2_index:
         asset_description: Genome index for HISAT2, produced with hisat2-build
@@ -2468,7 +2793,7 @@ genomes:
         default_tag: default
     aliases: 
      - hg38_noalt_decoy
-    genome_description: No description
+    genome_description: The GRCh38 reference with decoy and without alternative haplotypes from NCBI
   bfdbdd006617e34e64b298f48785022d9376acad57260aaf:
     assets:
       fasta:
@@ -2527,7 +2852,7 @@ genomes:
         default_tag: default
     aliases: 
      - mm10_primary
-    genome_description: No description
+    genome_description: UCSC mm10 assembly with primary chromosomes only
   047c6e1eda552b50c5add59ff0995a40bc4ce1732e3cc4ae:
     assets:
       fasta:
@@ -2586,7 +2911,7 @@ genomes:
         default_tag: default
     aliases: 
      - hg38_primary
-    genome_description: No description
+    genome_description: UCSC hg38 assembly with primary chromosomes only
   644d2b9de4adaccb31c8bde387f23edddc5834772dd51d33:
     assets:
       fasta:
@@ -2627,6 +2952,6 @@ genomes:
         default_tag: default
     aliases: 
      - hg38_mm10
-    genome_description: No description
+    genome_description: Merged genome with primary chromosomes of hg38 and mm10 from UCSC.
 genome_archive_folder: /project/shefflab//deploy/rg.databio.org_full/genomes/archive
 genome_archive_config: refgenie_config_archive.yaml
