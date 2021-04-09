@@ -679,7 +679,7 @@ genomes:
         default_tag: default
     aliases: 
      - mouse_chrM2x
-    genome_description: "The mouse mitochondrial genome, doubled"
+    genome_description: The mouse mitochondrial genome, doubled
   4bd8aa05a153e0c96a79c53915bc8d1f4a21fb0b75f93b87:
     assets:
       fasta:
@@ -1794,7 +1794,7 @@ genomes:
         default_tag: default
     aliases: 
      - human_alu
-    genome_description: "Manually curated human ALU repeats from GenBank, obtained from ref_decoy"
+    genome_description: Manually curated human ALU repeats from GenBank, obtained from ref_decoy
   b769bcf2deaf9d061d94f2007a0e956249905c64653cb5c8:
     assets:
       fasta:
@@ -2056,7 +2056,7 @@ genomes:
         default_tag: default
     aliases: 
      - human_alphasat
-    genome_description: "Manually curated human alpha-satellite sequences from GenBank, obtained from ref_decoy"
+    genome_description: Manually curated human alpha-satellite sequences from GenBank, obtained from ref_decoy
   0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1:
     assets:
       fasta:
@@ -2168,11 +2168,11 @@ genomes:
               dir: .
             asset_parents: 
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
-            archive_digest: 36d7ec7535d01c59f76a4b280cc88a79
-            archive_size: 39.3GB
+            archive_digest: 476deab636a94f999e6b984c23e49631
+            archive_size: 14.6GB
             asset_size: 25.2GB
             asset_children: []
-            legacy_archive_digest: b5af97e8e0a21feee6d6ba1ea1b8562f
+            legacy_archive_digest: 4dba6742e9f7a912bcba648307ae8dfb
         default_tag: default
       bwa_index:
         asset_description: Genome index for Burrows-Wheeler Alignment Tool, produced with bwa index
@@ -2567,7 +2567,7 @@ genomes:
         default_tag: default
     aliases: 
      - t7
-    genome_description: "Genome of T7 phage, V01146.1 from GenBank"
+    genome_description: Genome of T7 phage, V01146.1 from GenBank
   8baf9d24ad8f5678f0fe1f5b21a812d410755d49e3123158:
     assets:
       fasta:
