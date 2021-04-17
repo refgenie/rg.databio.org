@@ -412,9 +412,27 @@ genomes:
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/ensembl_gtf:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta_txome:default
-            asset_children: []
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/tgMap:default
             asset_digest: 7b271a9c8383046370ae882600b3c848
             legacy_archive_digest: a485f17c13d4ee6a25452627f2daabff
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        default_tag: default
+        tags:
+          default:
+            asset_path: tgMap
+            seek_keys:
+              tgMap: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_txp2gene.tsv
+              dir: .
+            archive_digest: eda8a5127cb33f05c92b75cce7f78764
+            archive_size: 1.1MB
+            asset_size: 4.5MB
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
+            asset_children: []
+            asset_digest: e8e30d826c3da0d675b1db6e5f79d2ce
+            legacy_archive_digest: 728cf696469c1303cb0dc1e39f0eeb5f
     aliases: 
      - hg38
     genome_description: The GCA_000001405.15 GRCh38_no_alt_analysis_set from NCBI
@@ -1491,9 +1509,27 @@ genomes:
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta_txome:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/ensembl_gtf:default
-            asset_children: []
+            asset_children: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/tgMap:default
             asset_digest: 1c9e9bfa5bc243254cafd0e665c6aceb
             legacy_archive_digest: 211c5928295305b487f920c1b909b706
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        default_tag: default
+        tags:
+          default:
+            asset_path: tgMap
+            seek_keys:
+              tgMap: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_txp2gene.tsv
+              dir: .
+            archive_digest: 0e13fa69a4510fda2d0c1cabed5c98f7
+            archive_size: 623.1KB
+            asset_size: 2.8MB
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/salmon_partial_sa_index:default
+            asset_children: []
+            asset_digest: 68b03f21ac42e64bbcf48d2ec0ce5312
+            legacy_archive_digest: df53a8cedd65b1afac6c41f8748a5200
     aliases: 
      - hg19
     genome_description: The GRCh37 reference sequence from UCSC
@@ -2312,9 +2348,27 @@ genomes:
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/ensembl_gtf:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta_txome:default
-            asset_children: []
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/tgMap:default
             asset_digest: eb150cae678e9ed871f54d7b023d0948
             legacy_archive_digest: 223b3228f77636e191f5460c1db06f2a
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        default_tag: default
+        tags:
+          default:
+            asset_path: tgMap
+            seek_keys:
+              tgMap: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_txp2gene.tsv
+              dir: .
+            archive_digest: fbae42cb7ea16780aa5fd8ce0f3596ad
+            archive_size: 716.0KB
+            asset_size: 3.0MB
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
+            asset_children: []
+            asset_digest: 026853c8e511b50694f6da046b4b4c4d
+            legacy_archive_digest: b8bda19220be70c2961f62d78810836a
     aliases: 
      - mm10
     genome_description: The GCA_000001635.5 seqs_for_alignment_pipelines from NCBI
@@ -2521,9 +2575,27 @@ genomes:
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/ensembl_gtf:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta_txome:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
-            asset_children: []
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/tgMap:default
             asset_digest: b7a1aa4d19028b3525adafb4295826f0
             legacy_archive_digest: f20e45bdb58dc5f1222df6f68fb8352d
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        default_tag: default
+        tags:
+          default:
+            asset_path: tgMap
+            seek_keys:
+              tgMap: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_txp2gene.tsv
+              dir: .
+            archive_digest: ab394a50fe6e3673d6df9362867a032b
+            archive_size: 237.4KB
+            asset_size: 869.9KB
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
+            asset_children: []
+            asset_digest: 0aa9adb8d5af4840263e3e8271c0ad40
+            legacy_archive_digest: d784f475b37fa7032a4861acc962c032
     aliases: 
      - rn6
     genome_description: The GCA_000001895.4_Rnor_6.0_genomic from NCBI

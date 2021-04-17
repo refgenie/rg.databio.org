@@ -290,6 +290,8 @@ genomes:
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/ensembl_gtf:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta:default
              - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/fasta_txome:default
+            asset_children: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/tgMap:default
         default_tag: default
       dbnsfp:
         asset_description: A database developed for functional prediction and annotation of all potential non-synonymous single-nucleotide variants (nsSNVs) in the human genome (Gencode release 29/Ensembl 94)
@@ -302,6 +304,18 @@ genomes:
               tabix: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_dbNSFP.txt.gz.tbi
               dir: .
             asset_parents: []
+        default_tag: default
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        tags:
+          default:
+            asset_path: tgMap
+            asset_digest: e8e30d826c3da0d675b1db6e5f79d2ce
+            seek_keys:
+              tgMap: 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4_txp2gene.tsv
+              dir: .
+            asset_parents: 
+             - 2230c535660fb4774114bfa966a62f823fdb6d21acf138d4/salmon_partial_sa_index:default
         default_tag: default
     aliases: 
      - hg38
@@ -1102,6 +1116,20 @@ genomes:
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta_txome:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/fasta:default
              - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/ensembl_gtf:default
+            asset_children: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/tgMap:default
+        default_tag: default
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        tags:
+          default:
+            asset_path: tgMap
+            asset_digest: 68b03f21ac42e64bbcf48d2ec0ce5312
+            seek_keys:
+              tgMap: baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c_txp2gene.tsv
+              dir: .
+            asset_parents: 
+             - baa91c8f6e2780cfd8fd1040ff37f51c379947a2a4820d6c/salmon_partial_sa_index:default
         default_tag: default
     aliases: 
      - hg19
@@ -1707,6 +1735,20 @@ genomes:
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/ensembl_gtf:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta:default
              - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/fasta_txome:default
+            asset_children: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/tgMap:default
+        default_tag: default
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        tags:
+          default:
+            asset_path: tgMap
+            asset_digest: 026853c8e511b50694f6da046b4b4c4d
+            seek_keys:
+              tgMap: 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1_txp2gene.tsv
+              dir: .
+            asset_parents: 
+             - 0f10d83b1050c08dd53189986f60970b92a315aa7a16a6f1/salmon_partial_sa_index:default
         default_tag: default
     aliases: 
      - mm10
@@ -1863,6 +1905,20 @@ genomes:
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/ensembl_gtf:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta_txome:default
              - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/fasta:default
+            asset_children: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/tgMap:default
+        default_tag: default
+      tgMap:
+        asset_description: Transcript to gene map file, containing two columns mapping of each transcript present in the reference to the corresponding gene.
+        tags:
+          default:
+            asset_path: tgMap
+            asset_digest: 0aa9adb8d5af4840263e3e8271c0ad40
+            seek_keys:
+              tgMap: 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9_txp2gene.tsv
+              dir: .
+            asset_parents: 
+             - 79168fd950d561cf5ce454dd27593c0af429b32cddce5ce9/salmon_partial_sa_index:default
         default_tag: default
     aliases: 
      - rn6

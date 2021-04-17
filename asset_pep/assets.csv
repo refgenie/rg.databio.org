@@ -177,3 +177,7 @@ dm6,refgene_anno
 dm6,bowtie2_index
 t7,fasta
 t7,bowtie2_index
+hg38,tgMap
+hg19,tgMap
+mm10,tgMap
+rn6,tgMap
