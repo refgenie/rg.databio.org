@@ -1,15 +1,13 @@
 pipeline_name: refgenie-build
 pipeline_type: sample
 input_schema: build_inschema.yaml
-var_templates:
-  compute_vars: "{looper.piface_dir}/build-compute-params.py"
 pre_submit:
   command_templates: 
-    - "{pipeline.var_templates.compute_vars} -a {sample.asset} -g {sample.genome}"
+    - "{looper.piface_dir}/build-compute-params.py -a {sample.asset} -g {sample.genome}"
 compute:
   bulker_crate: databio/refgenie:0.7.6
 command_template: >
-  refgenie build { sample.genome }/{ sample.asset }
+  refgenie build { sample.genome }/{ sample.asset } --map
   {% if sample.genome_description is defined %}--genome-description '{ sample.genome_description }'{% endif %}
   {%- if sample.input_value is defined -%}
     {%- for it in sample.input_type -%}
@@ -20,3 +18,9 @@ command_template: >
       {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
+  {% if pipeline.pipeline_name is defined %} --pipeline-kwargs pipeline_name={pipeline.pipeline_name} {% endif %}
+  {% if pipestat.namespace is defined %} --pipeline-kwargs pipestat_namespace={pipestat.namespace} {% endif %}
+  {% if pipestat.record_id is defined %} --pipeline-kwargs pipestat_record_id={pipestat.record_id} {% endif %}
+  {% if pipestat.schema is defined %} --pipeline-kwargs pipestat_schema={pipestat.schema} {% endif %}
+  {% if pipestat.results_file is defined %} --pipeline-kwargs pipestat_results_file={pipestat.results_file} {% endif %}
+  {% if pipestat.config is defined %} --pipeline-kwargs pipestat_config={pipestat.config} {% endif %}

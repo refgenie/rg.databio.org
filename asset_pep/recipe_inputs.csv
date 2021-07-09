@@ -40,6 +40,13 @@ mm10-fasta,fasta,ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_0000
 mm10-fasta_txome,fasta,ftp://ftp.ensembl.org/pub/release-97/fasta/mus_musculus/cdna/Mus_musculus.GRCm38.cdna.all.fa.gz,files,5414320f79c131c1f83b079a9a8370b1
 mm10-gencode_gtf,gencode_gtf,ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M22/gencode.vM22.annotation.gtf.gz,files,6a90b71512ccbd04b767e158a736c413
 mm10-refgene_anno,refgene,http://hgdownload.cse.ucsc.edu/goldenpath/mm10/database/refGene.txt.gz,files,af857d9ae8c55da826391ac8ff41b3c2
+mm39_cdna-fasta,fasta,ftp://ftp.ensembl.org/pub/release-104/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz,files,07cfae271e9d3e8572de453933e5be3e
+mm39-ensembl_gtf,ensembl_gtf,ftp://ftp.ensembl.org/pub/release-104/gtf/mus_musculus/Mus_musculus.GRCm39.104.gtf.gz,files,f414c99922bd29e350d4b5b85c7ffef4
+mm39-ensembl_rb,gff,ftp://ftp.ensembl.org/pub/release-104/regulation/mus_musculus/mus_musculus.GRCm39.Regulatory_Build.regulatory_features.20201021.gff.gz,files,cd5760f9a19fb0e0832100502e6b4cb1
+mm39-fasta,fasta,ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/635/GCA_000001635.9_GRCm39/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001635.9_GRCm39_full_analysis_set.fna.gz,files,78eb6069dc1cb7be6cd10a11aa67320e
+mm39-fasta_txome,fasta,ftp://ftp.ensembl.org/pub/release-104/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz,files,07cfae271e9d3e8572de453933e5be3e
+mm39-gencode_gtf,gencode_gtf,ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M27/gencode.vM27.annotation.gtf.gz,files,794eb8d273987a094dcc013afa2a1956
+mm39-refgene_anno,refgene,http://hgdownload.cse.ucsc.edu/goldenpath/mm39/database/refGene.txt.gz,files,9a8093461e38952377def2bc0aea1f4a
 mouse_chrM2x-fasta,fasta,http://big.databio.org/refgenomes/mouse_chrM2x.fa.gz,files,1d9c5d062144877babcedade63c18f48
 rCRSd-fasta,fasta,http://big.databio.org/refgenomes/rCRSd.fa.gz,files,588ae4d05a1edf683433da78fd5d71bf
 rn6_cdna-fasta,fasta,ftp://ftp.ensembl.org/pub/release-97/fasta/rattus_norvegicus/cdna/Rattus_norvegicus.Rnor_6.0.cdna.all.fa.gz,files,49422984447dee3fca93c970f58ee09b
@@ -51,6 +58,7 @@ dm6-ensembl_gtf,ensembl_gtf,ftp://ftp.ensembl.org/pub/release-89/gtf/drosophila_
 dm6-gencode_gtf,gencode_gtf,ftp://ftp.flybase.net/../genomes/Drosophila_melanogaster/dmel_r6.34_FB2020_03/gtf/dmel-all-r6.34.gtf.gz,files,671102dba0e821891e20c4c29ed8359e
 dm6-refgene_anno,refgene,http://hgdownload.soe.ucsc.edu/goldenPath/dm6/database/refGene.txt.gz,files,ff0a971b846adf14d45d52f822a87042
 mm10-suffixerator_index,memlimit,32GB,params,
+mm39-suffixerator_index,memlimit,32GB,params,
 hg18-suffixerator_index,memlimit,32GB,params,
 hg19-suffixerator_index,memlimit,32GB,params,
 hg38-suffixerator_index,memlimit,32GB,params,

@@ -92,12 +92,10 @@ mkdir -p $REFGENIE_RAW
 looper run asset_pep/refgenie_build_cfg.yaml -p local --amend getfiles --sel-attr asset --sel-incl fasta
 ```
 
-Check the status with `looper check --use-pipesat`:
-
-*`--use-pipesat` option is required as of early 2021. Might not be required if you're running later on.*
+Check the status with `looper check` / `looper check --itemized`
 
 ```
-looper check asset_pep/refgenie_build_cfg.yaml --amend getfiles --sel-attr asset --sel-incl fasta --use-pipestat
+looper check asset_pep/refgenie_build_cfg.yaml --amend getfiles --sel-attr asset --sel-incl fasta
 ```
 
 ## Step 2: Refgenie genome configuration file initialization
@@ -112,13 +110,40 @@ refgenie init -c $REFGENIE -f $GENOMES -u http://awspds.refgenie.databio.org/rg.
 
 Once files are present locally, we can run `refgenie build` on each asset specified in the sample_table (`assets.csv`). We have to submit fasta assets first:
 
+### Leveraging [_MapReduce_](http://refgenie.databio.org/en/latest/build/#build-assets-concurrently) programming model for concurrent builds
+
+Since we're about to build multiple assets concurrently we will first build the assets with `--map` option to store the metadata in a separate, newly created genome configuration file. This avoids any conflicts in concurrent asset builds.
+
+Subsequently, we'll run `refgenie build` with `--reduce` option to combine the metadata into a single genome configuration file.
+
+Refgenie _doesn't_ account for assets dependancy. Therefore, as we have assets that depend on other assets, we need to take care of the dependancies ourselves:
+
+1. `refgenie build --map` all fasta assets to establish genome namespaces
+2. Wait until jobs are completed, call `refgenie build --reduce`
+3. `refgenie build --map` all other top-level assets, e.g. fasta_txome, gencode_gtf
+4. Wait until jobs are completed, call `refgenie build --reduce`
+5. `refgenie build --map` all derived assets, e.g. bowtie2_index, bwa_index
+6. Wait until jobs are completed, call `refgenie build --reduce`
+
 ```
 looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm --sel-attr asset --sel-incl fasta
 ```
 
-This will create one job for each *asset*. Monitor job progress with: 
+This will create one job for each *asset*. Monitor job progress with `looper check`:
 
 ```
+looper check asset_pep/refgenie_build_cfg.yaml --sel-attr asset --sel-incl fasta --itemized
+```
+
+The _Reduce_ procedure is quick, so there's no need to submit the job to the cluster, just run it locally:
+
+```
+refgenie build --reduce
+```
+
+This takes care of the first two points, repeat the above steps for the other assets.
+
+<!-- ```
 grep CANCELLED ../genomes/submission/*.log
 ll ../genomes/submission/*.log
 grep error ../genomes/submission/*.log
@@ -130,13 +155,13 @@ ll ../genomes/data/*/*/*/_refgenie_build/*completed.flag
 ll ../genomes/data/*/*/*/_refgenie_build/*running.flag
 ll ../genomes/data/*/*/*/_refgenie_build/*completed.flag | wc -l
 cat ../genomes/submission/*.log
-```
+``` 
 
 To run all the asset types:
 
 ```
 looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm
-```
+``` -->
 
 ## Step 4. Archive assets
 
@@ -154,14 +179,18 @@ Then submit the archiving jobs with `looper run`
 looper run asset_pep/refgenieserver_archive_cfg.yaml -p bulker_local --sel-attr asset --sel-incl fasta
 ```
 
-Check progress with:
+Check progress with `looper check`:
 
+```
+looper check asset_pep/refgenieserver_archive_cfg.yaml --sel-attr asset --sel-incl fasta
+```
+<!-- 
 ```
 ll ../genomes/archive_logs/submission/*.log
 grep Wait ../genomes/archive_logs/submission/*.log
 grep Error ../genomes/archive_logs/submission/*.log
 cat ../genomes/archive_logs/submission/*.log
-```
+``` -->
 
 ## Step 5. Upload archives to S3
 
