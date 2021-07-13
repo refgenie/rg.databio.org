@@ -1,0 +1,102 @@
+
+from snakemake_helper_functions import get_input_templates, get_req_assets_by_asset
+
+pepfile: "/Users/mstolarczyk/code/rg.databio.org/asset_pep/refgenie_build_cfg.yaml"
+
+# get unique genomes from PEP
+# genomes_to_process = list(set(pep.sample_table.genome))
+genomes_to_process = ["hg38", "mm10"]
+
+top_level_assets = [
+    asset
+    for asset, reqs in get_req_assets_by_asset().items()
+    if len(reqs) == 0 and asset != "fasta"
+]
+
+derived_assets_level1 = [
+    asset
+    for asset, reqs in get_req_assets_by_asset().items()
+    if len(reqs) == 1
+]
+
+derived_assets_level2 = [
+    asset
+    for asset, reqs in get_req_assets_by_asset().items()
+    if len(reqs) > 1
+]
+
+rule map_init_genome_namespaces:
+    input: 
+        files = lambda wildcards: get_input_templates(wildcards=wildcards, asset="fasta")
+    output: 
+        flag = touch("{genome}-init_genome_namespaces.done")
+    run: "refgenie build --map {genome}/fasta --files fasta={fasta_file_path}"
+
+rule reduce_init_genome_namespaces:
+    input: 
+        # flag = rules.map_init_genome_namespaces.output.flag
+        flag = expand("{genome}-init_genome_namespaces.done", genome=genomes_to_process)
+    output: 
+        flag = touch("reduce_init_genome_namespaces.done")
+    run: "refgenie build --reduce"
+
+rule map_top_level_assets:
+    input: 
+        flag = rules.reduce_init_genome_namespaces.output.flag,
+        files = get_input_templates
+    params:
+        files_spec = lambda wildcards: " ".join(
+            [
+                "{}={}".format(file_id, input_template.format(genome=wildcards.genome, asset=wildcards.asset, input_id=file_id)) 
+                for file_id in req_files_by_asset[wildcards.asset]
+            ]
+        )
+    output: 
+        flag = touch("{genome}-{asset}-top_level_assets.done") 
+    run: "refgenie build --map {genome}/{asset} --files {params.files_spec}"
+
+rule reduce_top_level_assets:
+    input: 
+        flag = lambda wildcards: ["{g}-{a}-top_level_assets.done".format(g=wildcards.genome, a=a) for a in top_level_assets]
+    output: 
+        flag = touch("{genome}-reduce_top_level_assets.done")
+    run: "refgenie build --reduce"
+
+rule map_derived_level1_assets:
+    input: 
+        flag = rules.reduce_top_level_assets.output.flag
+    output: 
+        flag = touch("{genome}-{asset}-derived_level1_assets.done")
+    run: "refgenie build --map {genome}/{asset}"
+
+rule reduce_derived_level1_assets:
+    input: 
+        flag = lambda wildcards: ["{g}-{a}-derived_level1_assets.done".format(g=wildcards.genome, a=a) for a in derived_assets_level1]
+    output: 
+        flag = touch("{genome}-reduce_derived_level1_assets.done")
+    run: "refgenie build --reduce"
+
+# rule reduce_derived_level1_assets_all:
+    # message: f"Processing genomes: {list(set(pep.sample_table.genome))}"
+    # input: "{genome}-reduce_derived_level1_assets.done"
+
+
+rule map_derived_level2_assets:
+    input: 
+        flag = rules.reduce_derived_level1_assets.output.flag
+    output: 
+        flag = touch("{genome}-{asset}-derived_level2_assets.done")
+    run: "refgenie build --map {genome}/{asset}"
+
+
+rule reduce_derived_level2_assets:
+    input: 
+        flag = lambda wildcards: ["{g}-{a}-derived_level2_assets.done".format(g=wildcards.genome, a=a) for a in derived_assets_level2]
+    output: 
+        flag = touch("{genome}-reduce_derived_level2_assets.done")
+    run: "refgenie build --reduce"
+
+
+rule reduce_derived_level2_assets_all:
+    message: f"Processing genomes: {genomes_to_process}"
+    input: expand("{genome}-reduce_derived_level2_assets.done", genome=genomes_to_process)
