@@ -3,7 +3,7 @@ pipeline_type: sample
 input_schema: build_inschema.yaml
 pre_submit:
   command_templates: 
-    - "{looper.piface_dir}/build-compute-params.py -a {sample.asset} -g {sample.genome}"
+    - "{looper.piface_dir}/build_compute_params.py -a {sample.asset} -g {sample.genome}"
 compute:
   bulker_crate: databio/refgenie:0.7.6
 command_template: >

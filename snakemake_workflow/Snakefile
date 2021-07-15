@@ -6,7 +6,9 @@ from snakemake_helper_functions import (
     get_asset_file_spec,
     get_pep_intersect_for_genome,
     resolve_dependancies,
+    get_build_resources_wrapper,
 )
+
 configfile: "config.yaml"
 pepfile: "../asset_pep/refgenie_build_cfg.yaml"
 pepschema: "https://schema.databio.org/refgenie/refgenie_build.yaml"
@@ -29,15 +31,15 @@ top_level_assets = build_order[0]
 derived_assets_level1 = build_order[1]
 derived_assets_level2 = build_order[2]
 
-envvars:
-    "REFGENIE_RAW",
-    "REFGENIE"
-
 rule map_init_genome_namespace:
     input: 
         files = lambda wildcards: get_input_templates(wildcards=wildcards, asset="fasta")
     params:
         files_spec = lambda wildcards: " ".join(get_asset_file_spec(wildcards=wildcards, asset="fasta"))
+    resources:
+        mem = lambda wildcards: int(get_build_resources_wrapper(wildcards, force_asset="fasta")["mem"]),
+        time = lambda wildcards: get_build_resources_wrapper(wildcards, force_asset="fasta")["time"],
+        local_cores = lambda wildcards: get_build_resources_wrapper(wildcards, force_asset="fasta")["cores"],
     output: 
         flag = touch("{genome}-init_genome_namespace.done")
     shell: "refgenie build --map {wildcards.genome}/fasta --files {params.files_spec}"
@@ -56,6 +58,10 @@ rule map_top_level_assets:
         files = get_input_templates
     params:
         files_spec = lambda wildcards: " ".join(get_asset_file_spec(wildcards=wildcards))
+    resources:
+        mem = lambda wildcards: int(get_build_resources_wrapper(wildcards)["mem"]),
+        time = lambda wildcards: get_build_resources_wrapper(wildcards)["time"],
+        local_cores = lambda wildcards: get_build_resources_wrapper(wildcards)["cores"],
     output: 
         flag = touch("{genome}-{asset}-top_lvl.done") 
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset} --files {params.files_spec}"
@@ -81,6 +87,10 @@ rule reduce_top_level_assets:
 rule map_derived_level1_assets:
     input: 
         flag = rules.reduce_top_level_assets.output.flag
+    resources:
+        mem = lambda wildcards: int(get_build_resources_wrapper(wildcards)["mem"]),
+        time = lambda wildcards: get_build_resources_wrapper(wildcards)["time"],
+        local_cores = lambda wildcards: get_build_resources_wrapper(wildcards)["cores"],
     output: 
         flag = touch("{genome}-{asset}-derived_lvl1.done")
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset}"
@@ -103,6 +113,10 @@ rule reduce_derived_level1_assets:
 rule map_derived_level2_assets:
     input: 
         flag = rules.reduce_derived_level1_assets.output.flag
+    resources:
+        mem = lambda wildcards: int(get_build_resources_wrapper(wildcards)["mem"]),
+        time = lambda wildcards: get_build_resources_wrapper(wildcards)["time"],
+        local_cores = lambda wildcards: get_build_resources_wrapper(wildcards)["cores"],
     output: 
         flag = touch("{genome}-{asset}-derived_lvl2.done")
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset}"
