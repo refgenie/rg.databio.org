@@ -5,34 +5,31 @@ from snakemake_helper_functions import (
     get_req_files_by_asset,
     get_asset_file_spec,
     get_pep_intersect_for_genome,
+    resolve_dependancies,
 )
 
+# TODO: add config file
 pepfile: "/project/shefflab/deploy/rg.databio.org/rg.databio.org/asset_pep/refgenie_build_cfg.yaml"
+pepschema: "https://schema.databio.org/refgenie/refgenie_build.yaml"
 
+# this list can be used to specify a list of assets to skip
 dont_build = []
 
 # get unique genomes from PEP
-# genomes_to_process = list(set(pep.sample_table.genome))
-genomes_to_process = ["rCRSd"]
+genomes_to_process = list(set(pep.sample_table.genome))
+genomes_to_process = ["rCRSd"] # overwrite for testing
 
-top_level_assets = [
-    asset
-    for asset, reqs in get_req_assets_by_asset().items()
-    if len(reqs) == 0 and asset != "fasta"
-    # exclude fasta since it's already built in the namespace init rule
-]
+build_order = resolve_dependancies(get_req_assets_by_asset())
+# exclude fasta since it's already built in the namespace init rule
+build_order[0].remove("fasta")
 
-derived_assets_level1 = [
-    asset
-    for asset, reqs in get_req_assets_by_asset().items()
-    if len(reqs) == 1 
-]
+top_level_assets = build_order[0]
+derived_assets_level1 = build_order[1]
+derived_assets_level2 = build_order[2]
 
-derived_assets_level2 = [
-    asset
-    for asset, reqs in get_req_assets_by_asset().items()
-    if len(reqs) > 1
-]
+envvars:
+    "REFGENIE_RAW",
+    "REFGENIE"
 
 rule map_init_genome_namespace:
     input: 
@@ -58,7 +55,7 @@ rule map_top_level_assets:
     params:
         files_spec = lambda wildcards: " ".join(get_asset_file_spec(wildcards=wildcards))
     output: 
-        flag = touch("{genome}-{asset}-top_lvl_assets.done") 
+        flag = touch("{genome}-{asset}-top_lvl.done") 
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset} --files {params.files_spec}"
 
 rule reduce_top_level_assets:
