@@ -7,17 +7,19 @@ from snakemake_helper_functions import (
     get_pep_intersect_for_genome,
     resolve_dependancies,
 )
-
-# TODO: add config file
-pepfile: "/project/shefflab/deploy/rg.databio.org/rg.databio.org/asset_pep/refgenie_build_cfg.yaml"
+configfile: "config.yaml"
+pepfile: "../asset_pep/refgenie_build_cfg.yaml"
 pepschema: "https://schema.databio.org/refgenie/refgenie_build.yaml"
 
 # this list can be used to specify a list of assets to skip
-dont_build = []
+dont_build = config["dont_build"] if "dont_build" in config else []
 
-# get unique genomes from PEP
-genomes_to_process = list(set(pep.sample_table.genome))
-genomes_to_process = ["rCRSd"] # overwrite for testing
+# get unique genomes from PEP or config file
+genomes_to_process = (
+    config["genomes_to_process"]
+    if "genomes_to_process" in config
+    else list(set(pep.sample_table.genome))
+)
 
 build_order = resolve_dependancies(get_req_assets_by_asset())
 # exclude fasta since it's already built in the namespace init rule
