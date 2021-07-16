@@ -41,15 +41,15 @@ rule map_init_genome_namespace:
         time = lambda wildcards: get_build_resources_wrapper(wildcards, force_asset="fasta")["time"],
         local_cores = lambda wildcards: get_build_resources_wrapper(wildcards, force_asset="fasta")["cores"],
     output: 
-        flag = touch("{genome}-init_genome_namespace.done")
+        flag = touch(".flags/{genome}-init_genome_namespace.done")
     shell: "refgenie build --map {wildcards.genome}/fasta --files {params.files_spec}"
 
 rule reduce_init_genome_namespace:
     input: 
         # flag = rules.map_init_genome_namespace.output.flag
-        flag = expand("{genome}-init_genome_namespace.done", genome=genomes_to_process)
+        flag = expand(".flags/{genome}-init_genome_namespace.done", genome=genomes_to_process)
     output: 
-        flag = touch("reduce_init_genome_namespaces.done")
+        flag = touch(".flags/reduce_init_genome_namespaces.done")
     shell: "refgenie build --reduce"
 
 rule map_top_level_assets:
@@ -63,13 +63,13 @@ rule map_top_level_assets:
         time = lambda wildcards: get_build_resources_wrapper(wildcards)["time"],
         local_cores = lambda wildcards: get_build_resources_wrapper(wildcards)["cores"],
     output: 
-        flag = touch("{genome}-{asset}-top_lvl.done") 
+        flag = touch(".flags/{genome}-{asset}-top_lvl.done") 
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset} --files {params.files_spec}"
 
 rule reduce_top_level_assets:
     input: 
         flag = lambda wildcards: [
-            "{g}-{a}-top_lvl.done".format(g=wildcards.genome, a=a)
+            ".flags/{g}-{a}-top_lvl.done".format(g=wildcards.genome, a=a)
             for a in get_pep_intersect_for_genome(
                 genome=wildcards.genome, 
                 recipe_list=top_level_assets, 
@@ -81,7 +81,7 @@ rule reduce_top_level_assets:
         # in case the there are no top level assets to build
         flag_prev = rules.reduce_init_genome_namespace.output.flag
     output: 
-        flag = touch("{genome}-reduce_top_lvl.done")
+        flag = touch(".flags/{genome}-reduce_top_lvl.done")
     shell: "refgenie build --reduce"
 
 rule map_derived_level1_assets:
@@ -92,13 +92,13 @@ rule map_derived_level1_assets:
         time = lambda wildcards: get_build_resources_wrapper(wildcards)["time"],
         local_cores = lambda wildcards: get_build_resources_wrapper(wildcards)["cores"],
     output: 
-        flag = touch("{genome}-{asset}-derived_lvl1.done")
+        flag = touch(".flags/{genome}-{asset}-derived_lvl1.done")
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset}"
 
 rule reduce_derived_level1_assets:
     input: 
         flag = lambda wildcards: [
-            "{g}-{a}-derived_lvl1.done".format(g=wildcards.genome, a=a)
+            ".flags/{g}-{a}-derived_lvl1.done".format(g=wildcards.genome, a=a)
             for a in get_pep_intersect_for_genome(
                 genome=wildcards.genome, 
                 recipe_list=derived_assets_level1, 
@@ -107,7 +107,7 @@ rule reduce_derived_level1_assets:
             )
         ]
     output: 
-        flag = touch("{genome}-reduce_derived_lvl1.done")
+        flag = touch(".flags/{genome}-reduce_derived_lvl1.done")
     shell: "refgenie build --reduce"
 
 rule map_derived_level2_assets:
@@ -118,13 +118,13 @@ rule map_derived_level2_assets:
         time = lambda wildcards: get_build_resources_wrapper(wildcards)["time"],
         local_cores = lambda wildcards: get_build_resources_wrapper(wildcards)["cores"],
     output: 
-        flag = touch("{genome}-{asset}-derived_lvl2.done")
+        flag = touch(".flags/{genome}-{asset}-derived_lvl2.done")
     shell: "refgenie build --map {wildcards.genome}/{wildcards.asset}"
 
 rule reduce_derived_level2_assets:
     input: 
         flag = lambda wildcards: [
-            "{g}-{a}-derived_lvl2.done".format(g=wildcards.genome, a=a)
+            ".flags/{g}-{a}-derived_lvl2.done".format(g=wildcards.genome, a=a)
             for a in get_pep_intersect_for_genome(
                 genome=wildcards.genome, 
                 recipe_list=derived_assets_level2, 
@@ -133,8 +133,8 @@ rule reduce_derived_level2_assets:
             )
         ]
     output: 
-        flag = touch("{genome}-reduce_derived_lvl2.done")
+        flag = touch(".flags/{genome}-reduce_derived_lvl2.done")
     shell: "refgenie build --reduce"
 
 rule reduce_all:
-    input: expand("{genome}-reduce_derived_{level}.done", genome=genomes_to_process, level=["lvl1", "lvl2"])
+    input: expand(".flags/{genome}-reduce_derived_{level}.done", genome=genomes_to_process, level=["lvl1", "lvl2"])

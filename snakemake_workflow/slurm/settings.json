@@ -1,0 +1,6 @@
+{
+    "SBATCH_DEFAULTS": "partition=standard, output=.logs/slurm-%x-%j.out",
+    "CLUSTER_NAME": "",
+    "CLUSTER_CONFIG": "",
+    "ADVANCED_ARGUMENT_CONVERSION": "no"
+}
