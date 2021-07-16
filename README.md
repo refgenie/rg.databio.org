@@ -110,7 +110,7 @@ refgenie init -c $REFGENIE -f $GENOMES -u http://awspds.refgenie.databio.org/rg.
 
 Once files are present locally, we can run `refgenie build` on each asset specified in the sample_table (`assets.csv`). We have to submit fasta assets first:
 
-### Leveraging [_MapReduce_](http://refgenie.databio.org/en/latest/build/#build-assets-concurrently) programming model for concurrent builds
+### Option A: Leveraging [_MapReduce_](http://refgenie.databio.org/en/latest/build/#build-assets-concurrently) programming model for concurrent builds
 
 Since we're about to build multiple assets concurrently we will first build the assets with `--map` option to store the metadata in a separate, newly created genome configuration file. This avoids any conflicts in concurrent asset builds.
 
@@ -162,6 +162,52 @@ To run all the asset types:
 ```
 looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm
 ``` -->
+
+### Option B: Building _all_ assets with [Snakemake](https://snakemake.readthedocs.io/en/stable/)
+
+Alternatively, you can use the Snakemake workflow in [`snakemake_workflow`](./snakemake_workflow) directory. This workflow uses the inherent Snakemake's rule dependancy property to encode the refgenie build asset dependancies. 
+
+#### Configuration
+
+**Genome and assets**
+
+By default all the genomes and all the assets specified in the asset PEP will be built. However, this can be restricted using a Snakemake workflow configuration file ([`config.yaml`](./snakemake_workflow/config.yaml)). Therefore you need to make sure the [`config.yaml`](./snakemake_workflow/config.yaml) is empty to build all.
+
+To specify which genomes to build you need to specify them as a list in [`config.yaml`](./snakemake_workflow/config.yaml), like so:
+
+```yaml
+genomes_to_process:
+    - hg38
+    - mm10
+```
+
+To specify which assets to exclude from building you need to specify them as a list in [`config.yaml`](./snakemake_workflow/config.yaml), like so:
+
+```yaml
+assets_to_exclude:
+    - bwa_index
+    - ensembl_gtf
+```
+
+In addition to the config file, these values [can be overwritten via the command line](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#standard-configuration).
+
+**Compute resources**
+
+There is a pre-configured [SLURM Snakemake profile](https://github.com/Snakemake-Profiles/slurm) included in this repository, which specified the default SLURM settings, that are adjusted on-the-fly based on the asset/genome characteristics. To use it, you need to specify the profile with `--profile slurm` option.
+
+
+Another thing to specify is the number of max cluster jobs running in parallel, which you need to specify with `--jobs`.
+
+#### Execution
+
+To execute the Snakemake workflow, which will submit the jobs to the cluster, run the following:
+
+```
+cd snakemake_workflow
+snakemake reduce_all --profile slurm --jobs 8 
+```
+
+where `reduce_all` is the name of the target rule to execute.
 
 ## Step 4. Archive assets
 

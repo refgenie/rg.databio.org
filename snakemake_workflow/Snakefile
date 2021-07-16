@@ -14,7 +14,7 @@ pepfile: "../asset_pep/refgenie_build_cfg.yaml"
 pepschema: "https://schema.databio.org/refgenie/refgenie_build.yaml"
 
 # this list can be used to specify a list of assets to skip
-dont_build = config["dont_build"] if "dont_build" in config else []
+assets_to_exclude = config["assets_to_exclude"] if "assets_to_exclude" in config else []
 
 # get unique genomes from PEP or config file
 genomes_to_process = (
@@ -74,7 +74,7 @@ rule reduce_top_level_assets:
                 genome=wildcards.genome, 
                 recipe_list=top_level_assets, 
                 project=pep, 
-                exclusion_list=dont_build,
+                exclusion_list=assets_to_exclude,
             )
         ],
         # need to require the init napespaces step to run 
@@ -103,7 +103,7 @@ rule reduce_derived_level1_assets:
                 genome=wildcards.genome, 
                 recipe_list=derived_assets_level1, 
                 project=pep, 
-                exclusion_list=dont_build,
+                exclusion_list=assets_to_exclude,
             )
         ]
     output: 
@@ -129,7 +129,7 @@ rule reduce_derived_level2_assets:
                 genome=wildcards.genome, 
                 recipe_list=derived_assets_level2, 
                 project=pep, 
-                exclusion_list=dont_build,
+                exclusion_list=assets_to_exclude,
             )
         ]
     output: 
