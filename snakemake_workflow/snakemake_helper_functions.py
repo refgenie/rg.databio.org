@@ -19,10 +19,6 @@ def get_req_by_asset(req_type):
     }
 
 
-def get_req_assets_by_asset():
-    return get_req_by_asset(req_type=REQ_ASSETS)
-
-
 def get_req_files_by_asset():
     return get_req_by_asset(req_type=REQ_FILES)
 
@@ -64,53 +60,6 @@ def get_pep_intersect_for_genome(genome, recipe_list, project, exclusion_list=[]
         for sample in genome_samples
         if sample.asset in recipe_list and sample.asset not in exclusion_list
     ]
-
-
-def resolve_dependancies(reqs_dict, asset_aliases=ASSET_ALIASES):
-    """
-    Resolve asset build dependancies
-
-    :param Dict[str, Iterable[str]] reqs_dict: a dependency dictionary in which the values
-        are the dependencies of their respective keys.
-    :return List[Set[str]]: a list of sets that represet the build order
-    """
-
-    def _resolve_alias(asset_names):
-        """
-        Attempt to resolve an asset name to a known alias
-
-        :param Iterable[str] | str asset_names: the asset names to resolve
-        :return Iterable[str] | str: the resolved asset names
-        """
-        if isinstance(asset_names, str):
-            return (
-                asset_aliases[asset_names]
-                if asset_names in asset_aliases
-                else asset_names
-            )
-        if not isinstance(asset_names, list):
-            asset_names = [asset_names]
-        return [
-            asset_aliases[asset_name] if asset_name in asset_aliases else asset_name
-            for asset_name in asset_names
-        ]
-
-    # convert the lists to sets, to make sure that we don't have any duplicates, and resolve aliases
-    reqs_dict_set = {
-        _resolve_alias(k): set(_resolve_alias(v)) for k, v in reqs_dict.items()
-    }
-    build_groups = []
-    while reqs_dict_set:
-        # values not in keys, assets without depenencies
-        build_group = set(i for v in reqs_dict_set.values() for i in v) - set(
-            reqs_dict_set.keys()
-        )
-        # and keys without value, assets without depenencies
-        build_group.update(k for k, v in reqs_dict_set.items() if not v)
-        build_groups.append(build_group)
-        # remove the completed items
-        reqs_dict_set = {k: v - build_group for k, v in reqs_dict_set.items() if v}
-    return build_groups
 
 
 def get_build_resources(asset: str, genome: str) -> Dict[str, str]:
@@ -183,7 +132,6 @@ def get_build_resources(asset: str, genome: str) -> Dict[str, str]:
         compute["mem"] = "64000"
 
     return compute
-
 
 
 def get_build_resources_wrapper(

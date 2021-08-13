@@ -1,6 +1,6 @@
 # rg.databio.org server overview
 
-This repository contains the files to build and archive genome assets to serve with [refgenieserver](https://github.com/refgenie/refgenieserver) at http://rg.databio.org. 
+This repository contains the files to build and archive genome assets to serve with [refgenieserver](https://github.com/refgenie/refgenieserver) at http://rg.databio.org.
 
 The whole process is scripted, starting from this repository. From here, we do this basic workflow:
 
@@ -11,15 +11,14 @@ The whole process is scripted, starting from this repository. From here, we do t
 5. Upload archives to S3
 6. Deploy assets to active server on AWS.
 
-
 # Adding an asset to this server
 
 ## Overview of metadata structure
 
 The metadata is located in the [asset_pep](asset_pep) folder, which contains a [PEP](https://pep.databio.org) with metadata for each asset. The contents are:
 
-- `assets.csv` - The primary sample_table. Each each row is an asset. 
-- `recipe_inputs.csv` - The subsample_table. This provides a way to define each individual value passed to any of the 3 arguments of the `refgenie build` command: `--assets`, `--params`, and `--files`. 
+- `assets.csv` - The primary sample_table. Each each row is an asset.
+- `recipe_inputs.csv` - The subsample_table. This provides a way to define each individual value passed to any of the 3 arguments of the `refgenie build` command: `--assets`, `--params`, and `--files`.
 - `refgenie_build_cfg.yaml` -- config file that defines a subproject (which is used to download the input data) and additional project settings.
 
 ## Step 1: Add the asset to the asset table.
@@ -33,15 +32,17 @@ Your asset will be retrievable from the server with `refgenie pull {genome}/{ass
 
 ## Step 2: Add any required inputs to the recipe_inputs table
 
-Next, we need to add the source for each item required by your recipe. You can see what the recipe requires by using `-q` or `--requirements`, like this: `refgenie build {genome}/{recipe} -q`. If your recipe doesn't require any inputs, then you're done. If it requires any inputs (which can be one or more of the following: *assets*, *files*, *parameters*), then you need to specify these in the `recipe_inputs.csv` table.
+Next, we need to add the source for each item required by your recipe. You can see what the recipe requires by using `-q` or `--requirements`, like this: `refgenie build {genome}/{recipe} -q`. If your recipe doesn't require any inputs, then you're done. If it requires any inputs (which can be one or more of the following: _assets_, _files_, _parameters_), then you need to specify these in the `recipe_inputs.csv` table.
 
 For each required input, you add a row to `recipe_inputs.csv`. Follow these directions:
+
 - `sample_name` - must match the `genome` and `asset` value in the `assets.csv` file. Format it this way: `<genome>-<asset>`. This is how we match inputs to assets.
 
 Next you will need to fill in 3 columns:
-- `input_type` which is one of the following: *files*, *params* or *assets*
+
+- `input_type` which is one of the following: _files_, _params_ or _assets_
 - `intput_id` must match the recipe requirement. Again, use `refgenie build <genome>/<asset> -q` to learn the ids
-- `input_value` value for the input, e.g. URL in case of *files*
+- `input_value` value for the input, e.g. URL in case of _files_
 
 ## Step 3: See if you did it well!
 
@@ -129,7 +130,7 @@ Refgenie _doesn't_ account for assets dependancy. Therefore, as we have assets t
 looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm --sel-attr asset --sel-incl fasta
 ```
 
-This will create one job for each *asset*. Monitor job progress with `looper check`:
+This will create one job for each _asset_. Monitor job progress with `looper check`:
 
 ```
 looper check asset_pep/refgenie_build_cfg.yaml --sel-attr asset --sel-incl fasta --itemized
@@ -155,7 +156,7 @@ ll ../genomes/data/*/*/*/_refgenie_build/*completed.flag
 ll ../genomes/data/*/*/*/_refgenie_build/*running.flag
 ll ../genomes/data/*/*/*/_refgenie_build/*completed.flag | wc -l
 cat ../genomes/submission/*.log
-``` 
+```
 
 To run all the asset types:
 
@@ -165,7 +166,7 @@ looper run asset_pep/refgenie_build_cfg.yaml -p bulker_slurm
 
 ### Option B: Building _all_ assets with [Snakemake](https://snakemake.readthedocs.io/en/stable/)
 
-Alternatively, you can use the Snakemake workflow in [`snakemake_workflow`](./snakemake_workflow) directory. This workflow uses the inherent Snakemake's rule dependancy property to encode the refgenie build asset dependancies. 
+Alternatively, you can use the Snakemake workflow in [`snakemake_workflow`](./snakemake_workflow) directory. This workflow uses the inherent Snakemake's rule dependancy property to encode the refgenie build asset dependancies.
 
 #### Configuration
 
@@ -177,16 +178,16 @@ To specify which genomes to build you need to specify them as a list in [`config
 
 ```yaml
 genomes_to_process:
-    - hg38
-    - mm10
+  - hg38
+  - mm10
 ```
 
 To specify which assets to exclude from building you need to specify them as a list in [`config.yaml`](./snakemake_workflow/config.yaml), like so:
 
 ```yaml
 assets_to_exclude:
-    - bwa_index
-    - ensembl_gtf
+  - bwa_index
+  - ensembl_gtf
 ```
 
 In addition to the config file, these values [can be overwritten via the command line](https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#standard-configuration).
@@ -195,8 +196,15 @@ In addition to the config file, these values [can be overwritten via the command
 
 There is a pre-configured [SLURM Snakemake profile](https://github.com/Snakemake-Profiles/slurm) included in this repository, which specified the default SLURM settings, that are adjusted on-the-fly based on the asset/genome characteristics. To use it, you need to specify the profile with `--profile slurm` option.
 
-
 Another thing to specify is the number of max cluster jobs running in parallel, which you need to specify with `--jobs`.
+
+#### Inspect assets to be built
+
+You can generate a [DAG](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html#step-4-indexing-read-alignments-and-visualizing-the-dag-of-jobs) of assets to be built with `snakemake --dag` command:
+
+```
+snakemake reduce_all --dag | dot -Tsvg > dag.svg
+```
 
 #### Execution
 
@@ -204,18 +212,18 @@ To execute the Snakemake workflow, which will submit the jobs to the cluster, ru
 
 ```
 cd snakemake_workflow
-snakemake reduce_all --profile slurm --jobs 8 
+snakemake reduce_all --profile slurm --jobs 8
 ```
 
 where `reduce_all` is the name of the target rule to execute.
 
 ## Step 4. Archive assets
 
-Assets are built locally now, but to serve them, we must archive them using `refgenieserver`. The general command is `refgenieserver archive -c <path/to/genomes.yaml>`. Since the archive process is generally lengthy, it makes sense to submit this job to a cluster. We can use looper to do that. 
+Assets are built locally now, but to serve them, we must archive them using `refgenieserver`. The general command is `refgenieserver archive -c <path/to/genomes.yaml>`. Since the archive process is generally lengthy, it makes sense to submit this job to a cluster. We can use looper to do that.
 
-To start over completely, remove the archive config file with: 
+To start over completely, remove the archive config file with:
 
-``` 
+```
 rm config/refgenie_config_archive.yaml
 ```
 
@@ -230,7 +238,8 @@ Check progress with `looper check`:
 ```
 looper check asset_pep/refgenieserver_archive_cfg.yaml --sel-attr asset --sel-incl fasta
 ```
-<!-- 
+
+<!--
 ```
 ll ../genomes/archive_logs/submission/*.log
 grep Wait ../genomes/archive_logs/submission/*.log
@@ -242,14 +251,13 @@ cat ../genomes/archive_logs/submission/*.log
 
 Now the archives should be built, so we'll sync them to AWS. Use the refgenie credentials (here added with `--profile refgenie`, which should be preconfigured with `aws configure`)
 
-
 ```
 aws s3 sync $REFGENIE_ARCHIVE s3://awspds.refgenie.databio.org/rg.databio.org/ --profile refgenie
 ```
 
-## Step 6. Deploy server 
+## Step 6. Deploy server
 
-Now everything is ready to deploy. If using refgenieserver directly, you'll run `refgenieserver serve config/refgenieserver_archive_cfg`. We're hosting this repository on AWS and use GitHub Actions to trigger  trigger deploy jobs to push the updates to AWS ECS whenever a change is detected in the config file. 
+Now everything is ready to deploy. If using refgenieserver directly, you'll run `refgenieserver serve config/refgenieserver_archive_cfg`. We're hosting this repository on AWS and use GitHub Actions to trigger trigger deploy jobs to push the updates to AWS ECS whenever a change is detected in the config file.
 
 ```
 ga -A; gcm "Deploy to ECS"; gpoh

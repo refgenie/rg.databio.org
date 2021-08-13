@@ -1,17 +1,18 @@
-
+from refgenconf import RefGenConf
 from snakemake_helper_functions import (
     get_input_templates,
-    get_req_assets_by_asset,
     get_req_files_by_asset,
     get_asset_file_spec,
     get_pep_intersect_for_genome,
-    resolve_dependancies,
     get_build_resources_wrapper,
 )
 
 configfile: "config.yaml"
 pepfile: "../asset_pep/refgenie_build_cfg.yaml"
 pepschema: "https://schema.databio.org/refgenie/refgenie_build.yaml"
+
+rgc = RefGenConf(os.environ.get("REFGENIE")) # read the config file from the environment variable
+build_order = rgc.get_build_groups() # get asset build order based on the recipes managed by refgenie
 
 # this list can be used to specify a list of assets to skip
 assets_to_exclude = config["assets_to_exclude"] if "assets_to_exclude" in config else []
@@ -23,7 +24,7 @@ genomes_to_process = (
     else list(set(pep.sample_table.genome))
 )
 
-build_order = resolve_dependancies(get_req_assets_by_asset())
+
 # exclude fasta since it's already built in the namespace init rule
 build_order[0].remove("fasta")
 
